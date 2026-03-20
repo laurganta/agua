@@ -8,6 +8,8 @@ namespace CleverEdge
 {
     public class RegisterScreenBehaviour : MonoBehaviour
     {
+        [SerializeField] private bool _playWithoutRegistering;
+        
         [SerializeField] private Button _registerButton;
         [SerializeField] private Button _randomAvatarButton;
         [SerializeField] private Button _backbutton;
@@ -55,10 +57,10 @@ namespace CleverEdge
 
         private void Update()
         {
-            _registerButton.interactable = string.IsNullOrEmpty(PlayerName) == false 
+            _registerButton.interactable = _playWithoutRegistering || (string.IsNullOrEmpty(PlayerName) == false 
                                             && string.IsNullOrEmpty(Phone) == false 
                                             && string.IsNullOrEmpty(Email) == false
-                                            && GdprAccepted;
+                                            && GdprAccepted);
         }
 
         private void OnAvatarClick()

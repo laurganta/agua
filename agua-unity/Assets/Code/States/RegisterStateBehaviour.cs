@@ -53,6 +53,7 @@ namespace CleverEdge
         private void OnEnable()
         {
             _registerScreenBehaviour.gameObject.SetActive(true);
+            _registerScreenBehaviour.SetRandomAvatar();
 
             // var entry = LeaderboardState.Provider.Entries.OrderBy(x => x.Time).FirstOrDefault();
             //
