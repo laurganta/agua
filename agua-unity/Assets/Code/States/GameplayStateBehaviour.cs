@@ -62,8 +62,9 @@ namespace CleverEdge
             
             _inputSystemActions = ServiceLocator.GetInstance<InputSystem_Actions>();
 
-            _enemiesControllerBehaviour.Initialize(OnEnemyDefeated);
+            _enemiesControllerBehaviour.Initialize(OnEnemyDefeated, OnEnemyDamaged);
         }
+
 
         private void OnEnable()
         {
@@ -228,6 +229,11 @@ namespace CleverEdge
             _gameplayScreenBehaviour.SetScoreMultiplier(scoreMultiplier);
         }
 
+        private void OnEnemyDamaged(EnemyBehaviour obj)
+        {
+            _gameplayScreenBehaviour.PingActivityTimer();
+        }
+        
         private void OnEnemyDefeated(EnemyBehaviour enemyBehaviour, Enemy enemyConfig)
         {
             var score = enemyConfig.score * _currentScoreMultiplier;

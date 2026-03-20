@@ -59,6 +59,11 @@ namespace CleverEdge
             _scoreText.SetValueAnimated(score);
         }
         
+        public void PingActivityTimer()
+        {
+            _noActivityTimer = 0;
+        }
+        
         public void SetTimeLeft(float timeLeft, bool animated = false)
         {
             if (animated)

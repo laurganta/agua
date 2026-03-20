@@ -6130,13 +6130,14 @@ GameObject:
   m_Component:
   - component: {fileID: 973063344}
   - component: {fileID: 973063345}
+  - component: {fileID: 973063346}
   m_Layer: 5
   m_Name: WinLoseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &973063344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6179,6 +6180,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &973063346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973063343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2024d79f945c934ab1fa370c8beb71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.WinLoseTextBehaviour
+  _animator: {fileID: 973063345}
+  _winText: {fileID: 751040818}
+  _loseText: {fileID: 1475684644}
 --- !u!1 &974687823
 GameObject:
   m_ObjectHideFlags: 0
@@ -7756,7 +7772,7 @@ MonoBehaviour:
   _tutorialAnimator: {fileID: 909752407}
   _readySetGoAnimator: {fileID: 911230488}
   _radySetGoDelaySeconds: 1
-  _winLoseText: {fileID: 0}
+  _winLoseText: {fileID: 973063346}
 --- !u!1001 &1154023482
 PrefabInstance:
   m_ObjectHideFlags: 0

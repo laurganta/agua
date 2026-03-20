@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3084188822041588924, guid: 5af4cfbd0210f3149a5cc977d3329ad0, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.21568628
+      value: 0.49411765
       objectReference: {fileID: 0}
     - target: {fileID: 3084188822041588924, guid: 5af4cfbd0210f3149a5cc977d3329ad0, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.25882354
+      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 3084188822041588924, guid: 5af4cfbd0210f3149a5cc977d3329ad0, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.972549
+      value: 0.48235294
       objectReference: {fileID: 0}
     - target: {fileID: 4317951588099250270, guid: 5af4cfbd0210f3149a5cc977d3329ad0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8707452433931938605, guid: 5af4cfbd0210f3149a5cc977d3329ad0, type: 3}
       propertyPath: m_Name
-      value: Hit_VFX_Elite
+      value: Hit_VFX_Dummy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

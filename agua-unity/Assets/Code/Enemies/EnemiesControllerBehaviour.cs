@@ -28,6 +28,7 @@ namespace CleverEdge
         private float _currentSpawnInterval;
 
         private Action<EnemyBehaviour, Enemy> _onEnemyDefeated;
+        private Action<EnemyBehaviour> _onEnemyDamaged;
 
         private float _currentRoundTime;
         
@@ -46,9 +47,10 @@ namespace CleverEdge
             }
         }
 
-        public void Initialize(Action<EnemyBehaviour, Enemy> onEnemyDefeated)
+        public void Initialize(Action<EnemyBehaviour, Enemy> onEnemyDefeated, Action<EnemyBehaviour> onEnemyDamaged)
         {
             _onEnemyDefeated = onEnemyDefeated;
+            _onEnemyDamaged = onEnemyDamaged;
         }
 
         private Enemy GetEnemyByTier(EnemyTier tier)
@@ -64,7 +66,7 @@ namespace CleverEdge
                     var enemy = Instantiate(prefab.gameObject).GetComponent<EnemyBehaviour>();
                     enemy.transform.SetParent(transform);
                     enemy.gameObject.SetActive(false);
-                    enemy.Initialize(tier, OnEnemyDefeated);
+                    enemy.Initialize(tier, OnEnemyDefeated, OnDamaged);
                     return enemy;
                 },
                 actionOnGet: (enemy) =>
@@ -120,6 +122,11 @@ namespace CleverEdge
                 defaultCapacity: startCapacity,
                 maxSize: maxCapacity
             );
+        }
+
+        private void OnDamaged(EnemyBehaviour enemy)
+        {
+            _onEnemyDamaged?.Invoke(enemy);
         }
 
         private void OnEnemyDefeated(EnemyBehaviour enemyBehaviour, bool wasKilledByPlayer)

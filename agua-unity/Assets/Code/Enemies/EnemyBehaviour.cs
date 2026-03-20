@@ -45,10 +45,12 @@ namespace CleverEdge
         private Tweener _damagePunchTweener;
         
         private Action<EnemyBehaviour, bool> _onDeath;
+        private Action<EnemyBehaviour> _onDamaged;
 
         private VFXControllerBehaviour _vfxController;
         private CameraShakeBehaviour _cameraShakeBehaviour;
-        
+
+
         public EnemyTier Tier { get; private set; }
 
         public float PathCompletedPercentage => _movementBehaviour.PathCompletedPercentage;
@@ -56,9 +58,11 @@ namespace CleverEdge
         public bool FinishedMoving => _movementBehaviour.FinishedMoving;
         
         public void Initialize(EnemyTier tier, 
-            Action<EnemyBehaviour, bool> onDeath)
+            Action<EnemyBehaviour, bool> onDeath, Action<EnemyBehaviour> onDamaged)
         {
             _onDeath = onDeath;
+            _onDamaged = onDamaged;
+            
             Tier = tier;
             
             _vfxController = ServiceLocator.GetInstance<VFXControllerBehaviour>();
@@ -115,6 +119,7 @@ namespace CleverEdge
 
         public void Damage(float damage, Vector3 hitPosition)
         {
+            _onDamaged?.Invoke(this);
             _currentHealth -= damage;
 
             if (_currentHealth <= 0f)
