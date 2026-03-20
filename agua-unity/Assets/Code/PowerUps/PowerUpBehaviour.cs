@@ -21,11 +21,14 @@ namespace CleverEdge
         [SerializeField] private PowerUpType _powerUpType;
         [SerializeField] private int _spawnLimit;
         [SerializeField] private int _collectionLimit;
+        [SerializeField] private Transform _scaleRoot;
 
         [SerializeField] private bool _isActive;
-        
-        [Header("Gameplay")]
+
+        [Header("Gameplay")] 
+        [SerializeField] private Component[] _disableComponentsOnCollect;
         [SerializeField] private float _activeSeconds;
+        [SerializeField] private VFXEffectType _collectVFXEffectType;
         
         [Header("Animations")]
         [SerializeField] private float _showDuration;
@@ -35,6 +38,7 @@ namespace CleverEdge
 
         private float _activeTimer;
         private bool _activeDurationEnded;
+        private bool _collected;
 
         public PowerUpType PowerUpType => _powerUpType;
         
@@ -45,6 +49,8 @@ namespace CleverEdge
         
         public int SpawnLimit => _spawnLimit;
         public int CollectionLimit => _collectionLimit;
+        
+        public Transform ScaleRoot => _scaleRoot;
 
         public void Initialize(Action<PowerUpBehaviour> onCollect,  Action<PowerUpBehaviour> onActiveDurationEnd)
         {
@@ -61,14 +67,28 @@ namespace CleverEdge
         private void OnEnable()
         {
             _activeTimer = 0;
+            _collected = false;
             _activeDurationEnded = false;
-
+            _scaleRoot.localScale = Vector3.one;
+            SetComponentsActive(true);
+            
             PlayScaleAnimation(Vector3.zero, Vector3.one, _showDuration, _showCurve);
+        }
+        
+        private void SetComponentsActive(bool active)
+        {
+            foreach (var component in _disableComponentsOnCollect)
+            {
+                if (component is Collider collider)
+                    collider.enabled = active;
+                else if (component is MonoBehaviour monoBehaviour)
+                    monoBehaviour.enabled = active;
+            }
         }
 
         private void Update()
         {
-            if (_activeDurationEnded)
+            if (_activeDurationEnded || _collected)
                 return;
             
             _activeTimer += Time.deltaTime;
@@ -88,11 +108,14 @@ namespace CleverEdge
                 _onActiveDurationEnd.Invoke(this);
             };
         }
-
+        
         public void Collect()
         {
+            SetComponentsActive(false);
             _onCollect?.Invoke(this);
-            ServiceLocator.GetInstance<VFXControllerBehaviour>().PlayEffect(VFXEffectType.PowerUpCollect, transform.position, Quaternion.identity);
+            _collected = true;
+
+            ServiceLocator.GetInstance<VFXControllerBehaviour>().PlayEffect(_collectVFXEffectType, transform.position, Quaternion.identity);
         }
     }
 }

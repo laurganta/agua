@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -34,6 +36,14 @@ namespace CleverEdge
         [SerializeField] public int _extraTimeSeconds;
         [SerializeField] private Color _extraTimeFlyTextColor;
         [SerializeField] private float _extraTimeFlyTextSize;
+        
+        [Header("Configuration - Bomb")]
+        [SerializeField] private float _bombDelaySeconds;
+        [SerializeField] private float _bombPositionShakeStrength;
+        [SerializeField] private float _bombScaleShakeStrength;
+
+        [Header("Configuration - Score Multiplier")] 
+        [SerializeField] private float _scoreMultiplier;
 
         private Dictionary<PowerUpType, PowerUpBehaviour> _powerUps;
 
@@ -47,7 +57,8 @@ namespace CleverEdge
 
         private GameplayStateBehaviour _gameplayState;
         private PlayerBehaviour _playerBehaviour;
-
+        private VFXControllerBehaviour _vfxController;
+        
         private void SelectNewSpawnTime()
         {
             _currentSpawnTime = Random.Range(_spawnIntervalRange.x, _spawnIntervalRange.y);
@@ -74,25 +85,68 @@ namespace CleverEdge
         {
             _gameplayState = ServiceLocator.GetInstance<GameplayStateBehaviour>();
             _playerBehaviour = ServiceLocator.GetInstance<PlayerBehaviour>();
+            _vfxController = ServiceLocator.GetInstance<VFXControllerBehaviour>();
         }
 
         private void OnCollect(PowerUpBehaviour powerUp)
         {
             _runtimePowerUps[powerUp.PowerUpType].IncrementCollected();
             
-            ReleasePowerUp(powerUp);
-
             switch (powerUp.PowerUpType)
             {
                 case PowerUpType.ExtraTime:
                     _gameplayState.AddExtraTime(_extraTimeSeconds);
                     _flyTextController.SpawnScoreFlyText(powerUp.transform.position, $"+{_extraTimeSeconds}s", _extraTimeFlyTextColor, _extraTimeFlyTextSize);
+                    
+                    ReleasePowerUp(powerUp);
                     break;
                 
                 case PowerUpType.DoubleBarrel:
                     _playerBehaviour.SetLeftHandActive(true);
+                    
+                    ReleasePowerUp(powerUp);
+                    break;
+                
+                case PowerUpType.Bomb:
+
+                    StartCoroutine(ExplodeBombAfterSeconds(powerUp, _bombDelaySeconds));
+                    
+                    break;
+                
+                case PowerUpType.ScoreMultiplier:
+                    
+                    _gameplayState.SetScoreMultiplier(_scoreMultiplier);
+                    
+                    ReleasePowerUp(powerUp);
                     break;
             }
+        }        
+        
+        private IEnumerator ExplodeBombAfterSeconds(PowerUpBehaviour bomb, float bombDelaySeconds)
+        {
+            var timer = 0.0f;
+
+            _vfxController.PlayEffect(VFXEffectType.BombExplosion, bomb.ScaleRoot.position, Quaternion.identity);
+            var initialPosition = bomb.transform.position;
+
+            while (timer < bombDelaySeconds)
+            {
+                timer += Time.deltaTime;
+            
+                var shakeOffset = Random.insideUnitSphere * _bombPositionShakeStrength;
+                bomb.transform.position = initialPosition + shakeOffset * (1 - timer / bombDelaySeconds);
+                
+                var scaleOffset = Vector3.one * Mathf.Lerp(-_bombScaleShakeStrength, _bombScaleShakeStrength, Random.value);
+                bomb.transform.localScale = Vector3.one + scaleOffset * (1.5f - timer / bombDelaySeconds);
+                
+                yield return null;
+            }
+
+            ReleasePowerUp(bomb);
+            
+            FindObjectsByType<EnemyBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+                .ToList()
+                .ForEach(enemy => enemy.Damage(1000000, enemy.transform.position));
         }
 
         private void OnPowerUpActiveDurationEnd(PowerUpBehaviour powerUp)

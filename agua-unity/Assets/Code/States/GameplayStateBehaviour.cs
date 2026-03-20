@@ -37,6 +37,7 @@ namespace CleverEdge
         private float _roundTimer;
         private float _startTimer;
         private float _currentRoundDuration;
+        private float _currentScoreMultiplier;
 
         private bool _bossDefeated;
 
@@ -75,11 +76,15 @@ namespace CleverEdge
             switch (_state)
             {
                 case State.Init:
+                    
                     _playerBehaviour.PrepareForRound();
+                    _gameplayScreenBehaviour.PrepareForRound();
+                    
                     _startTimer = 0;
                     _roundTimer = 0;
                     _currentRoundDuration = _roundDuration;
                     _bossDefeated = false;
+                    _currentScoreMultiplier = 1;
                     
                     _sessionData = new SessionData();
                     _gameplayScreenBehaviour.SetScore(_sessionData.Score);
@@ -160,14 +165,22 @@ namespace CleverEdge
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
+        public void SetScoreMultiplier(float scoreMultiplier)
+        {
+            _currentScoreMultiplier = scoreMultiplier;
+            _gameplayScreenBehaviour.SetScoreMultiplier(scoreMultiplier);
+        }
+
         private void OnEnemyDefeated(Enemy enemy, Vector3 position)
         {
-            _sessionData.Score += enemy.score;
+            var score = enemy.score * _currentScoreMultiplier;
+            
+            _sessionData.Score += score;
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
             _cameraShakeBehaviour.Shake();
 
-            var scoreText = "+" + ((int) enemy.score).ToString("0");
+            var scoreText = "+" + ((int) score).ToString("0");
             _flyTextController.SpawnScoreFlyText(position, scoreText , enemy.scoreColor, enemy.scoreFlyTextSize);
             
             if (enemy.tier == EnemyTier.Boss)

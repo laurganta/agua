@@ -6,7 +6,7 @@ namespace CleverEdge
     {
         private static readonly int ShowHash = Animator.StringToHash("Show");
         
-        [SerializeField] private ScoreTextBehaviour scoreText;
+        [SerializeField] private ScoreTextBehaviour _scoreText;
         [SerializeField] private TimerBehaviour _roundTimer;
         [SerializeField] private float _noActivityTutorialDelay;
         [SerializeField] private Animator _tutorialAnimator;
@@ -18,13 +18,13 @@ namespace CleverEdge
         public void SetScore(float score)
         {
             _noActivityTimer = 0;
-            scoreText.SetValue(score);
+            _scoreText.SetValue(score);
         }
 
         public void SetScoreAnimated(float score)
         {
             _noActivityTimer = 0;
-            scoreText.SetValueAnimated(score);
+            _scoreText.SetValueAnimated(score);
         }
         
         public void SetTimeLeft(float timeLeft, bool animated = false)
@@ -47,6 +47,16 @@ namespace CleverEdge
             {
                 _tutorialAnimator.SetTrigger(ShowHash);
             }
+        }
+
+        public void SetScoreMultiplier(float scoreMultiplier)
+        {
+            _scoreText.SetScoreMultiplier(scoreMultiplier);
+        }
+
+        public void PrepareForRound()
+        {
+            _scoreText.ResetMultiplier();
         }
     }
 }

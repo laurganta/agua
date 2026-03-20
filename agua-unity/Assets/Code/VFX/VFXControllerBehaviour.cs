@@ -15,6 +15,7 @@ namespace CleverEdge
         BulletBubbles,
         BulletHit,
         PowerUpCollect,
+        BombExplosion,
     }
 
     public static class VFXExtensions
@@ -74,8 +75,8 @@ namespace CleverEdge
                 var pool = new ObjectPool<VFXEffectBehaviour>(
                     createFunc: () =>
                     {
-                        var effect = Instantiate(effectInfo.prefab);
-                        
+                        var effect = Instantiate(effectInfo.prefab, transform, true);
+
                         effect.Initialize(OnEffectDispose, effectInfo.effectType);
                         
                         return effect;
