@@ -16,6 +16,7 @@ namespace CleverEdge
         [SerializeField] private Transform _enemiesSpawnCenter;
         [SerializeField] private Vector2 _spawnAreaSize;
         [SerializeField] private Transform[] _dummyEnemiesPosition;
+        [SerializeField] private EnemyMovementPathBehaviour _bossPath;
 
         private Dictionary<EnemyTier, ObjectPool<EnemyBehaviour>> _enemiesPools;
         
@@ -26,12 +27,13 @@ namespace CleverEdge
         private float _spawnTimer;
         private float _currentSpawnInterval;
 
-        private Action<Enemy, Vector3> _onEnemyDefeated;
+        private Action<EnemyBehaviour, Enemy> _onEnemyDefeated;
 
         private float _currentRoundTime;
         
         public int ActiveEnemiesCount => _activeEnemies.Count;
-        
+        public EnemyBehaviour Boss { get; private set; }
+
         private void Awake()
         {
             _enemiesPools = new Dictionary<EnemyTier, ObjectPool<EnemyBehaviour>>();
@@ -44,7 +46,7 @@ namespace CleverEdge
             }
         }
 
-        public void Initialize(Action<Enemy, Vector3> onEnemyDefeated)
+        public void Initialize(Action<EnemyBehaviour, Enemy> onEnemyDefeated)
         {
             _onEnemyDefeated = onEnemyDefeated;
         }
@@ -71,12 +73,15 @@ namespace CleverEdge
                     if (enemy.Tier == EnemyTier.Default || enemy.Tier == EnemyTier.Elite)
                     {
                         var path = _movementPathControllerBehaviour.GetRandomFreePath();
-                        var startPosition = enemy.SetMovementPath(path);
+                        var startPosition = enemy.SetMovementPath(path, Random.value < 0.5f ? 1 : -1);
                         enemy.transform.position = startPosition;
                     }
                     else if (enemy.Tier == EnemyTier.Boss)
                     {
-                        enemy.transform.position = GetBossSpawnPosition();
+                        var startPosition = enemy.SetMovementPath(_bossPath, 1);
+                        enemy.transform.position = startPosition;
+
+                        Boss = enemy;
                     }
                     else if (enemy.Tier == EnemyTier.Rogue)
                     {
@@ -100,6 +105,9 @@ namespace CleverEdge
                     enemy.gameObject.SetActive(false); 
                     _movementPathControllerBehaviour.FreePath(enemy.GetMovementPath());
                     _activeEnemies.Remove(enemy);
+
+                    if (enemy.Tier == EnemyTier.Boss)
+                        Boss = null;
                 },
                 actionOnDestroy: (enemy) =>
                 {
@@ -121,7 +129,7 @@ namespace CleverEdge
             if (wasKilledByPlayer)
             {
                 var enemy = GetEnemyByTier(enemyBehaviour.Tier);
-                _onEnemyDefeated.Invoke(enemy, enemyBehaviour.transform.position);
+                _onEnemyDefeated.Invoke(enemyBehaviour, enemy);
             }
         }
 
@@ -152,11 +160,6 @@ namespace CleverEdge
         private EnemyBehaviour SpawnEnemy(EnemyTier tier)
         {
             return _enemiesPools[tier].Get();
-        }
-        
-        private Vector3 GetBossSpawnPosition()
-        {
-            return _enemiesSpawnCenter.position;
         }
         
         private void Update()

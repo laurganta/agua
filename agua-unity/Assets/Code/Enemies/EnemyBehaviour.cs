@@ -27,7 +27,6 @@ namespace CleverEdge
         [SerializeField] private float _deathAnimationScale;
         [SerializeField] private float _deathAnimationRotation;
         
-        
         [Header("Death Camera Shake")]
         [SerializeField] private float _deathCameraShakeDuration;
         [SerializeField] private float _deathCameraShakeMagnitude;
@@ -52,6 +51,10 @@ namespace CleverEdge
         
         public EnemyTier Tier { get; private set; }
 
+        public float PathCompletedPercentage => _movementBehaviour.PathCompletedPercentage;
+        
+        public bool FinishedMoving => _movementBehaviour.FinishedMoving;
+        
         public void Initialize(EnemyTier tier, 
             Action<EnemyBehaviour, bool> onDeath)
         {
@@ -148,9 +151,9 @@ namespace CleverEdge
             return _inOutAnimations.DOScale(Vector3.one, _showAnimationDuration).SetEase(Ease.OutCubic);
         }
 
-        public Vector3 SetMovementPath(EnemyMovementPathBehaviour path)
+        public Vector3 SetMovementPath(EnemyMovementPathBehaviour path, int direction)
         {
-            return _movementBehaviour.SetPath(path, () =>
+            return _movementBehaviour.SetPath(path, direction, () =>
             {
                 Die(false);
             });
@@ -164,6 +167,11 @@ namespace CleverEdge
         public EnemyMovementPathBehaviour GetMovementPath()
         {
             return _movementBehaviour.CurrentPath;
+        }
+
+        public void StopMoving()
+        {
+            _movementBehaviour.Stop();
         }
     }
 }

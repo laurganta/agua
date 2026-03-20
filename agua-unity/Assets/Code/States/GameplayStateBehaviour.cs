@@ -145,7 +145,15 @@ namespace CleverEdge
                     break;
                 case State.Boss:
                     if (_bossDefeated)
+                    {
                         ChangeState(State.WaitingToEnd);
+                    }
+                    else if (_enemiesControllerBehaviour.Boss.FinishedMoving)
+                    {
+                        _enemiesControllerBehaviour.Boss.StopMoving();
+                        ChangeState(State.WaitingToEnd);
+                    }
+                    
                     break;
                 case State.WaitingToEnd:
                     _roundTimer += Time.deltaTime;
@@ -190,6 +198,12 @@ namespace CleverEdge
                     break;
                 
                 case State.WaitingToEnd:
+
+                    if (_bossDefeated)
+                        _gameplayScreenBehaviour.ShowWinText();
+                    else
+                        _gameplayScreenBehaviour.ShowLoseText();
+
                     _roundTimer = 0;
                     _enemiesControllerBehaviour.ClearRemainingEnemies();
                     _inputSystemActions.Disable();
@@ -208,25 +222,28 @@ namespace CleverEdge
             }
         }
 
-
         public void SetScoreMultiplier(float scoreMultiplier)
         {
             _currentScoreMultiplier = scoreMultiplier;
             _gameplayScreenBehaviour.SetScoreMultiplier(scoreMultiplier);
         }
 
-        private void OnEnemyDefeated(Enemy enemy, Vector3 position)
+        private void OnEnemyDefeated(EnemyBehaviour enemyBehaviour, Enemy enemyConfig)
         {
-            var score = enemy.score * _currentScoreMultiplier;
-            
+            var score = enemyConfig.score * _currentScoreMultiplier;
+
+            if (enemyConfig.tier == EnemyTier.Boss)
+            {
+                _bossDefeated = true;
+
+                score *= 1 - enemyBehaviour.PathCompletedPercentage;
+            }
+
             _sessionData.Score += score;
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
 
             var scoreText = "+" + ((int) score).ToString("0");
-            _flyTextController.SpawnScoreFlyText(position, scoreText , enemy.scoreColor, enemy.scoreFlyTextSize);
-            
-            if (enemy.tier == EnemyTier.Boss)
-                _bossDefeated = true;
+            _flyTextController.SpawnScoreFlyText(enemyBehaviour.transform.position, scoreText , enemyConfig.scoreColor, enemyConfig.scoreFlyTextSize);
         }
 
         public void AddExtraTime(int extraTimeSeconds)

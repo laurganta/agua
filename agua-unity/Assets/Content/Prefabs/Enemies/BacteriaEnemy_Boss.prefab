@@ -26,11 +26,19 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 306c472223a96254ba7fafa64700224b, type: 2}
     - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _animationSpeed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: _durationRange.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: _durationRange.y
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _tier
@@ -38,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _startHealth
-      value: 30
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _punchScale.x

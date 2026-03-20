@@ -13,16 +13,18 @@ namespace CleverEdge
         [SerializeField] private float _animationSpeed;
 
         private Coroutine _followPathCoroutine;
+        private float _pathCompletedPercentage;
         
         private static readonly int SpeedHash = Animator.StringToHash("Speed");
         
         public EnemyMovementPathBehaviour CurrentPath { get; private set; }
         
-        public Vector3 SetPath(EnemyMovementPathBehaviour path, Action onPathComplete)
+        public float PathCompletedPercentage => _pathCompletedPercentage;
+        public bool FinishedMoving => _pathCompletedPercentage >= 1f;
+
+        public Vector3 SetPath(EnemyMovementPathBehaviour path, int direction, Action onPathComplete)
         {
             CurrentPath = path;
-            
-            var direction = Random.value < 0.5f ? 1 : -1;
             
             _followPathCoroutine = StartCoroutine(FollowPath(path, direction, onPathComplete));
 
@@ -47,11 +49,11 @@ namespace CleverEdge
             
             _animator.SetFloat(SpeedHash, _animationSpeed);
             
-            while (t < 1f)
+            while (t < duration)
             {
                 t += Time.deltaTime / duration;
-                var ratio = _animationCurve.Evaluate(t);
-                var position = path.GetPosition(ratio, direction);
+                _pathCompletedPercentage = _animationCurve.Evaluate(t);
+                var position = path.GetPosition(_pathCompletedPercentage, direction);
                 transform.position = position;
                 yield return null;
             }

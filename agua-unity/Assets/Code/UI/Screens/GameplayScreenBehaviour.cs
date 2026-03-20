@@ -6,12 +6,15 @@ namespace CleverEdge
     public class GameplayScreenBehaviour : MonoBehaviour
     {
         private static readonly int ShowHash = Animator.StringToHash("Show");
+
         
         [SerializeField] private ScoreTextBehaviour _scoreText;
         [SerializeField] private TimerBehaviour _roundTimer;
         [SerializeField] private float _noActivityTutorialDelay;
         [SerializeField] private Animator _tutorialAnimator;
         [SerializeField] private Animator _readySetGoAnimator;
+        [SerializeField] private float _radySetGoDelaySeconds;
+        [SerializeField] private WinLoseTextBehaviour _winLoseText;
 
         public int SecondsLeft => _roundTimer.SecondsLeft;
         public bool IsPlayingInto => _isPlayingIntro;
@@ -20,6 +23,29 @@ namespace CleverEdge
 
         private bool _isPlaying;
         private bool _isPlayingIntro;
+
+        public void PrepareForRound()
+        {
+            _scoreText.ResetMultiplier();
+            _isPlaying = false;
+            _isPlayingIntro = false;
+            _readySetGoAnimator.gameObject.SetActive(false);
+            _winLoseText.gameObject.SetActive(false);
+        }
+
+        public void ShowWinText()
+        {
+            // Play Confetti VFX
+            _winLoseText.gameObject.SetActive(true);
+            _winLoseText.SetWin(true);
+        }
+        
+        public void ShowLoseText()
+        {
+            // Play Lose VFX
+            _winLoseText.gameObject.SetActive(true);
+            _winLoseText.SetWin(false);
+        }
 
         public void SetScore(float score)
         {
@@ -63,14 +89,6 @@ namespace CleverEdge
             _scoreText.SetScoreMultiplier(scoreMultiplier);
         }
 
-        public void PrepareForRound()
-        {
-            _scoreText.ResetMultiplier();
-            _isPlaying = false;
-            _isPlayingIntro = false;
-            _readySetGoAnimator.gameObject.SetActive(false);
-        }
-
         public void StartPlaying()
         {
             _isPlaying = true;
@@ -91,7 +109,7 @@ namespace CleverEdge
         {
             _isPlayingIntro = true;
 
-            yield return new WaitForSeconds(_tutorialAnimator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(_radySetGoDelaySeconds);
             
             _readySetGoAnimator.gameObject.SetActive(true);
          
