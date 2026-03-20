@@ -99,7 +99,7 @@ namespace CleverEdge
             {
                 case PowerUpType.ExtraTime:
                     _gameplayState.AddExtraTime(_extraTimeSeconds);
-                    _flyTextController.SpawnScoreFlyText(powerUp.transform.position, $"+{_extraTimeSeconds}s", _extraTimeFlyTextColor, _extraTimeFlyTextSize);
+                    _flyTextController.SpawnFlyText(powerUp.transform.position, $"+{_extraTimeSeconds}s", _extraTimeFlyTextColor, _extraTimeFlyTextSize);
                     
                     ReleasePowerUp(powerUp);
                     break;

@@ -27,6 +27,7 @@ namespace CleverEdge
         [SerializeField] private PowerUpsControllerBehaviour _powerUpsControllerBehaviour;
         [SerializeField] private FlyTextControllerBehaviour _flyTextController;
         [SerializeField] private PlayerBehaviour _playerBehaviour;
+        [SerializeField] private ParticleSystem _confettiParticleSystem;
 
         [Header("Tutorial")] 
         [SerializeField] private float _tutorialDummyEnemiesDelay;
@@ -35,8 +36,11 @@ namespace CleverEdge
         [Header("Round Settings")]
         [SerializeField] private float _roundDuration;
         [SerializeField] private float _waitingToEndDuration;
-        [SerializeField] private float _waitingToStartDuration;
 
+        [Header("Misc")] // This Should Not Be Here
+        [SerializeField] private Color _scoreMultiplierFlyTextColor;
+        [SerializeField] private float _scoreMultiplierFlyTextSize;
+        
         private InputSystem_Actions _inputSystemActions;
         
         private State _state;
@@ -50,6 +54,8 @@ namespace CleverEdge
 
         private SessionData _sessionData;
         public Action OnGameEnd;
+        
+        private bool HasScoreMultiplier => _currentScoreMultiplier > 1;
 
         public void SetRoundDuration(float duration)
         {
@@ -201,7 +207,10 @@ namespace CleverEdge
                 case State.WaitingToEnd:
 
                     if (_bossDefeated)
+                    {
+                        _confettiParticleSystem.Play(true);
                         _gameplayScreenBehaviour.ShowWinText();
+                    }
                     else
                         _gameplayScreenBehaviour.ShowLoseText();
 
@@ -249,9 +258,14 @@ namespace CleverEdge
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
 
             var scoreText = "+" + ((int) score).ToString("0");
-            _flyTextController.SpawnScoreFlyText(enemyBehaviour.transform.position, scoreText , enemyConfig.scoreColor, enemyConfig.scoreFlyTextSize);
+
+            var flyTextColor = HasScoreMultiplier ? _scoreMultiplierFlyTextColor : enemyConfig.scoreColor;
+            var flyTextSize = HasScoreMultiplier ? enemyConfig.scoreFlyTextSize * _scoreMultiplierFlyTextSize : enemyConfig.scoreFlyTextSize;
+            
+            _flyTextController.SpawnFlyText(enemyBehaviour.transform.position, scoreText , flyTextColor, flyTextSize);
         }
 
+        
         public void AddExtraTime(int extraTimeSeconds)
         {
             if (_state != State.Playing)

@@ -14,6 +14,8 @@ namespace CleverEdge
         [SerializeField] private Button _randomAvatarButton;
         [SerializeField] private Button _backbutton;
         [SerializeField] private Button _gdprButton;
+        [SerializeField] private Button _instantPlayButton;
+        
         // [SerializeField] private Button _selectPlayerButton;
         
         [SerializeField] private AvatarBehaviour _avatarBehaviour;
@@ -49,10 +51,24 @@ namespace CleverEdge
             _randomAvatarButton.onClick.AddListener(OnAvatarClick);
             _backbutton.onClick.AddListener(OnBackButtonClick);
             _gdprButton.onClick.AddListener(OnGDPRButtonClick);
+            _instantPlayButton.onClick.AddListener(OnInstantPlayClick);
             // _selectPlayerButton.onClick.AddListener(SelectPlayerButtonClick);
 
             _registerButton.interactable = false;
             _gdprToggle.isOn = false;
+        }
+
+        private void OnInstantPlayClick()
+        {
+            AndroidPinDialog.Instance.ShowDefaultPinDialogue((pin) =>
+            {
+                if (pin == Constants.PIN)
+                {
+                    SetRandomAvatar();
+                    SetPlayer(Player.Admin);
+                    OnRegister?.Invoke();
+                }
+            });
         }
 
         private void SelectPlayerButtonClick()

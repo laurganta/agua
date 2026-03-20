@@ -7,8 +7,6 @@ namespace CleverEdge
     public class MainMenuScreenBehaviour : MonoBehaviour
     {
         [SerializeField] private Button _playButton;
-        // [SerializeField] private Button _nextLeaderboardButton;
-        // [SerializeField] private Button _previousLeaderboardButton;
 
         [SerializeField] private GameObject _devMenu;
         [SerializeField] private Button _showDevMenu;
@@ -19,8 +17,6 @@ namespace CleverEdge
         [SerializeField] private LeaderboardBehaviour _leaderboardBehaviour;
         
         public Action OnPlay;
-        // public Action OnNextLeaderboard;
-        // public Action OnPreviousLeaderboard;
         public Action OnReset;
         public Action OnStartNewMatch;
         public Action<string> OnSelectPlayer;
@@ -28,12 +24,10 @@ namespace CleverEdge
         private void Awake()
         {
             _playButton.onClick.AddListener(OnPlayButtonClick);
-            // _nextLeaderboardButton.onClick.AddListener(NextLeaderboard);
-            // _previousLeaderboardButton.onClick.AddListener(PreviousLeaderboard);
             _startNewMatchButton.onClick.AddListener(OnStartNewMatchClick);
             
             _devMenu.SetActive(false);
-            _showDevMenu.onClick.AddListener(ShowDevMenu);
+            _showDevMenu.onClick.AddListener(() => ShowDevMenu());
             _hideDevMenu.onClick.AddListener(HideDevMenu);
             _resetButton.onClick.AddListener(OnResetButtonClick);
             
@@ -61,25 +55,30 @@ namespace CleverEdge
             _leaderboardBehaviour.Initialize();
         }
         
-        public void ShowDevMenu()
+        public bool ShowDevMenu()
         {
-            _devMenu.SetActive(true);
+            AndroidPinDialog.Instance.ShowDefaultPinDialogue(
+                pin =>
+                {
+                    GameDebug.Log("PIN entered: " + pin);
+                    if (pin == Constants.PIN)
+                    {
+                        _devMenu.SetActive(true);
+                    }
+                    else
+                    {
+                        GameDebug.Log("Incorrect PIN");
+                    }
+                }
+            );
+
+            return false;
         }
 
         public void HideDevMenu()
         {
             _devMenu.SetActive(false);
         }
-
-        // private void PreviousLeaderboard()
-        // {
-        //     OnPreviousLeaderboard?.Invoke();
-        // }
-        //
-        // private void NextLeaderboard()
-        // {
-        //     OnNextLeaderboard?.Invoke();
-        // }
 
         private void OnPlayButtonClick()
         {
@@ -88,9 +87,9 @@ namespace CleverEdge
 
         public void SelectPlayerInDebugMenu(string playerName)
         {
-            _devMenu.SetActive(true);
-            _devMenu.GetComponentInChildren<PlayerInfoListBehaviour>()
-                .SearchPlayer(playerName);
+            var success = ShowDevMenu();
+            if (success)
+                _devMenu.GetComponentInChildren<PlayerInfoListBehaviour>().SearchPlayer(playerName);
         }
     }
 }

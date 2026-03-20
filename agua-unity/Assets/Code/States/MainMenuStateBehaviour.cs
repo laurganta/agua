@@ -16,8 +16,6 @@ namespace CleverEdge
         private void Awake()
         {
             _mainMenuScreenBehaviour.OnPlay += Play;
-            // _mainMenuScreenBehaviour.OnNextLeaderboard += OnNextLeaderboard;
-            // _mainMenuScreenBehaviour.OnPreviousLeaderboard += OnPreviousLeaderboard;
             _mainMenuScreenBehaviour.OnSelectPlayer += OnSelectPlayer;
             _mainMenuScreenBehaviour.OnReset += OnReset;
             _mainMenuScreenBehaviour.OnStartNewMatch += OnStartNewMatch;

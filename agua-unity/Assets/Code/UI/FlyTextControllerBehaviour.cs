@@ -39,12 +39,10 @@ namespace CleverEdge
             );
         }
 
-        public void SpawnScoreFlyText(Vector3 position, string text, Color color, float scale = 1)
+        public void SpawnFlyText(Vector3 position, string text, Color color, float scale = 1)
         {
             if (_flyTextPool == null)
-            {
                 InitializePool();
-            }
             
             var scoreFlyText = _flyTextPool.Get();
             scoreFlyText.transform.position = position + _spawnOffset;

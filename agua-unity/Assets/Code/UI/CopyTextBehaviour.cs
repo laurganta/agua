@@ -18,7 +18,7 @@ namespace CleverEdge
         {
             GUIUtility.systemCopyBuffer = _textToCopy.text;
             
-            AndroidToast.Show($"Copied \"{_textToCopy.text}\" to clipboard");
+            AndroidUtils.Show($"Copied \"{_textToCopy.text}\" to clipboard");
         }
     }
 }

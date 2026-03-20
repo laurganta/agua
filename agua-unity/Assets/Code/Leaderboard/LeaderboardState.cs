@@ -105,6 +105,18 @@ namespace CleverEdge
 
         public void SetEntry(LeaderboardEntry entry)
         {
+            if (string.IsNullOrEmpty(entry.Player.PlayerName))
+            {
+                GameDebug.LogWarning($"Can't set leaderboard entry with empty player name");
+                return;
+            }
+
+            if (string.Equals(entry.Player.PlayerName, Player.Admin.PlayerName))
+            {
+                GameDebug.LogWarning($"Can't set leaderboard entry for admin player");
+                return;
+            }
+
             var scoreSet = false;
             
             foreach (var existingEntry in Entries)

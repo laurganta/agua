@@ -69,7 +69,7 @@ namespace CleverEdge
         }
     }
     
-    public class AndroidToast
+    public class AndroidUtils
     {
         public static void Show(string message)
         {
