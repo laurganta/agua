@@ -1,0 +1,1171 @@
+fileFormatVersion: 2
+guid: 6d2071d8a4aef49489d9b5c4d5f36047
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: avatar_creature_pack_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 4160
+        width: 409
+        height: 436
+      alignment: 9
+      pivot: {x: 0.49060026, y: 0.44051257}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc5cbade257e0142b06055c44fdf44f
+      internalID: -362241839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_1
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 4160
+        width: 476
+        height: 436
+      alignment: 9
+      pivot: {x: 0.4980783, y: 0.42447096}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcfc9fc608a868240b50bf6f9776f901
+      internalID: -1808603026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_2
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 4132
+        width: 516
+        height: 464
+      alignment: 9
+      pivot: {x: 0.50886357, y: 0.47634256}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6714ffcf88170524fb645a5be14a4d46
+      internalID: -1522968877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_3
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 4132
+        width: 502
+        height: 464
+      alignment: 9
+      pivot: {x: 0.51639926, y: 0.46845746}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d030b44572d64114784ec366aaa08194
+      internalID: -1666319273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_4
+      rect:
+        serializedVersion: 2
+        x: 2476
+        y: 4131
+        width: 422
+        height: 465
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a533a5e89e8b2049b6c940dda5c209b
+      internalID: 1233687375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_6
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 3606
+        width: 514
+        height: 422
+      alignment: 9
+      pivot: {x: 0.48398325, y: 0.50867045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4129f6cbe2eb8014a8caaca0bcf34679
+      internalID: -1842177213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_7
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 3606
+        width: 435
+        height: 464
+      alignment: 9
+      pivot: {x: 0.5063087, y: 0.47831464}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb91010d0d6350845af7a1ad562ce92b
+      internalID: 1441118559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_8
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 3634
+        width: 449
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c23d556857805d54b98e26eca5b41e0f
+      internalID: 481748620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_9
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 3606
+        width: 503
+        height: 409
+      alignment: 9
+      pivot: {x: 0.5218227, y: 0.50671}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe854452c52048347b1c05c704237e18
+      internalID: 156150708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_11
+      rect:
+        serializedVersion: 2
+        x: 2464
+        y: 3606
+        width: 433
+        height: 409
+      alignment: 9
+      pivot: {x: 0.5084502, y: 0.50671}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d418fcfea5bc080468fd4e471c9666e0
+      internalID: -541564900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_12
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 3108
+        width: 461
+        height: 409
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c08cd9f0ccc85c4a92aee6f611731d1
+      internalID: -480363655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_13
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 3083
+        width: 473
+        height: 434
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3bdf236c3fe28d42bb3ded7fab1a0b7
+      internalID: -1931627118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_14
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 3108
+        width: 435
+        height: 422
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aea735611de17f499205a53b06ecbf7
+      internalID: -2025448930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_15
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 3122
+        width: 486
+        height: 408
+      alignment: 9
+      pivot: {x: 0.5056464, y: 0.48879048}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fccab92c930ad24478ec0a56ecea8c89
+      internalID: -849948737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_16
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 3108
+        width: 435
+        height: 463
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ddad7e96cfa9ff478d85aea7fd7148d
+      internalID: 433321928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2611
+        width: 500
+        height: 407
+      alignment: 9
+      pivot: {x: 0.4762168, y: 0.47302997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c58c3dc1d62e3345a67a6d444e73a45
+      internalID: 137854684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_18
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2611
+        width: 420
+        height: 442
+      alignment: 9
+      pivot: {x: 0.5304911, y: 0.4586093}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a15a09176fa0f749be9ff0d1475387b
+      internalID: 898608797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_19
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 2597
+        width: 475
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c50e42cffc971704eaff974cdf5305d2
+      internalID: 239111016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_20
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 2596
+        width: 436
+        height: 409
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6a9c39177b55cb4f82f8197f2606acf
+      internalID: -1105908305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_21
+      rect:
+        serializedVersion: 2
+        x: 2422
+        y: 2597
+        width: 489
+        height: 379
+      alignment: 9
+      pivot: {x: 0.5280592, y: 0.54585785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff1b72223e32004ebbaabbee2b97252
+      internalID: -1557411556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2085
+        width: 487
+        height: 380
+      alignment: 9
+      pivot: {x: 0.4887301, y: 0.528887}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7ac0e8e1eda68428ee81c29e456f36
+      internalID: 112864551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_23
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2085
+        width: 436
+        height: 435
+      alignment: 9
+      pivot: {x: 0.50839204, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c30035f25638f4099b73c584443858
+      internalID: -1824372293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_24
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 2100
+        width: 487
+        height: 393
+      alignment: 9
+      pivot: {x: 0.5075132, y: 0.50232774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a05e8595435ca64c8037d1189e6d1f6
+      internalID: 1770833594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_25
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 2100
+        width: 409
+        height: 446
+      alignment: 9
+      pivot: {x: 0.5335481, y: 0.46103165}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da2ecb0d2e743584080c15d5974ed60d
+      internalID: -967358182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_27
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 2101
+        width: 453
+        height: 392
+      alignment: 9
+      pivot: {x: 0.48182634, y: 0.47199795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6525454c0b46c54bb230af012683154
+      internalID: -854549927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1560
+        width: 486
+        height: 422
+      alignment: 9
+      pivot: {x: 0.48494256, y: 0.45881516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6da510df4ba33b347a6314a9b4bca146
+      internalID: 1971670474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_30
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1560
+        width: 447
+        height: 408
+      alignment: 9
+      pivot: {x: 0.49590722, y: 0.4955163}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0ce25a3454ac75428188da1d1cdcadd
+      internalID: 1446620593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_31
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 1573
+        width: 435
+        height: 450
+      alignment: 9
+      pivot: {x: 0.50420564, y: 0.4491816}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc433f0c3ed2d2a468dbd7e12b2cf6cd
+      internalID: -192211453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_32
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 1573
+        width: 489
+        height: 368
+      alignment: 9
+      pivot: {x: 0.53367144, y: 0.5397717}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4df0f229bd2b8b41a7b6724fe85dccc
+      internalID: -252497832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_33
+      rect:
+        serializedVersion: 2
+        x: 2478
+        y: 1454
+        width: 396
+        height: 500
+      alignment: 9
+      pivot: {x: 0.51847947, y: 0.57134986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b8c1652f575a1f49b0cc41ce5203b28
+      internalID: -972557881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1050
+        width: 460
+        height: 474
+      alignment: 9
+      pivot: {x: 0.51789707, y: 0.4208773}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03149ce4901d88842a550f72637f646a
+      internalID: -1044643347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_35
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 1035
+        width: 473
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158daa9e67e21854aa0ebaa32bccad54
+      internalID: 1449323571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_36
+      rect:
+        serializedVersion: 2
+        x: 1237
+        y: 1035
+        width: 435
+        height: 435
+      alignment: 9
+      pivot: {x: 0.50841135, y: 0.48528057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cd6f5e69b490f42ba2fe0ce10ab3c2
+      internalID: -747298530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_37
+      rect:
+        serializedVersion: 2
+        x: 1830
+        y: 1048
+        width: 462
+        height: 380
+      alignment: 9
+      pivot: {x: 0.52969956, y: 0.4783354}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35011c1bcd928b349a74af057099fb45
+      internalID: 1813187721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_38
+      rect:
+        serializedVersion: 2
+        x: 2437
+        y: 1035
+        width: 479
+        height: 406
+      alignment: 9
+      pivot: {x: 0.5133676, y: 0.5022532}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7139951ca9e487a47aa9630c1b51ccb2
+      internalID: 1597638947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_39
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 523
+        width: 449
+        height: 422
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46315053}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b86411d7e8d4e47862324cf4a29f24
+      internalID: 1799558806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_40
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 510
+        width: 462
+        height: 394
+      alignment: 9
+      pivot: {x: 0.5158396, y: 0.5232171}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 387ca4913e6fc5544a8b054b8f6bc2e8
+      internalID: -240868888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_41
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 509
+        width: 486
+        height: 422
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944366828d6d7e64ab2170888cd02016
+      internalID: 831672031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_42
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 523
+        width: 489
+        height: 395
+      alignment: 9
+      pivot: {x: 0.52618897, y: 0.49768436}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc631b78497b174f90062bcfa90c65f
+      internalID: -618101010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_43
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 510
+        width: 435
+        height: 461
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbdeae0bc1c794740b7f1cc6bad8bac9
+      internalID: 40525152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_44
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 499
+        height: 406
+      alignment: 9
+      pivot: {x: 0.47066972, y: 0.45493898}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4cc96a077003b409bce4e7fb6fbb44
+      internalID: 1636404064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_45
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 0
+        width: 503
+        height: 379
+      alignment: 9
+      pivot: {x: 0.4981813, y: 0.45655596}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa1bd9203797758489fef14d374b3b0d
+      internalID: 1884236850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_46
+      rect:
+        serializedVersion: 2
+        x: 1265
+        y: 0
+        width: 394
+        height: 460
+      alignment: 9
+      pivot: {x: 0.5278599, y: 0.42045793}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56315771559f3f4680195d10c29fcd6
+      internalID: 532405686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_47
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 0
+        width: 476
+        height: 406
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e5e280d4d03444c9c48d3b990c0b68
+      internalID: -1562841682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: avatar_creature_pack_48
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 0
+        width: 448
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a8f55217eeb474d9001b26e5702b39
+      internalID: 1769994843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c6981478148f83f429e1dff8e95e84ee
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":3.0},"gridSpriteSize":{"x":441.0,"y":522.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      avatar_creature_pack_0: -362241839
+      avatar_creature_pack_1: -1808603026
+      avatar_creature_pack_10: 1697289377
+      avatar_creature_pack_11: -541564900
+      avatar_creature_pack_12: -480363655
+      avatar_creature_pack_13: -1931627118
+      avatar_creature_pack_14: -2025448930
+      avatar_creature_pack_15: -849948737
+      avatar_creature_pack_16: 433321928
+      avatar_creature_pack_17: 137854684
+      avatar_creature_pack_18: 898608797
+      avatar_creature_pack_19: 239111016
+      avatar_creature_pack_2: -1522968877
+      avatar_creature_pack_20: -1105908305
+      avatar_creature_pack_21: -1557411556
+      avatar_creature_pack_22: 112864551
+      avatar_creature_pack_23: -1824372293
+      avatar_creature_pack_24: 1770833594
+      avatar_creature_pack_25: -967358182
+      avatar_creature_pack_26: 322920106
+      avatar_creature_pack_27: -854549927
+      avatar_creature_pack_28: -1940399873
+      avatar_creature_pack_29: 1971670474
+      avatar_creature_pack_3: -1666319273
+      avatar_creature_pack_30: 1446620593
+      avatar_creature_pack_31: -192211453
+      avatar_creature_pack_32: -252497832
+      avatar_creature_pack_33: -972557881
+      avatar_creature_pack_34: -1044643347
+      avatar_creature_pack_35: 1449323571
+      avatar_creature_pack_36: -747298530
+      avatar_creature_pack_37: 1813187721
+      avatar_creature_pack_38: 1597638947
+      avatar_creature_pack_39: 1799558806
+      avatar_creature_pack_4: 1233687375
+      avatar_creature_pack_40: -240868888
+      avatar_creature_pack_41: 831672031
+      avatar_creature_pack_42: -618101010
+      avatar_creature_pack_43: 40525152
+      avatar_creature_pack_44: 1636404064
+      avatar_creature_pack_45: 1884236850
+      avatar_creature_pack_46: 532405686
+      avatar_creature_pack_47: -1562841682
+      avatar_creature_pack_48: 1769994843
+      avatar_creature_pack_5: 1645250729
+      avatar_creature_pack_6: -1842177213
+      avatar_creature_pack_7: 1441118559
+      avatar_creature_pack_8: 481748620
+      avatar_creature_pack_9: 156150708
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
