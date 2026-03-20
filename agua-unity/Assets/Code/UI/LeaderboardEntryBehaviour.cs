@@ -12,6 +12,8 @@ namespace CleverEdge
         public struct RankSettings
         {
             public int rank;
+            public Color scoreColor;
+            public int scoreFontSize;
             public GameObject reference;
         }
 
@@ -35,14 +37,19 @@ namespace CleverEdge
             OnSelectPlayer.Invoke(_player.PlayerName);
         }
 
-        public void Set(LeaderboardEntry entry, int rank)
+        public void Set(LeaderboardEntry entry, int rankIndex)
         {
             _player = entry.Player;
             
             _playerNameText.text = entry.Player.PlayerName;
             _scoreText.text = entry.Score.ToString("0");
+            _scoreText.color = _rankSettings[rankIndex].scoreColor;
+            _scoreText.fontSize = _rankSettings[rankIndex].scoreFontSize;
+            
             _avatarBehaviour.SetAvatar(entry.Player.AvatarIndex);
 
+            var rank = rankIndex + 1;
+            
             for (int i = 0; i < _rankSettings.Count; i++)
             {
                 if (rank >= _rankSettings[i].rank && (i == _rankSettings.Count - 1 || rank < _rankSettings[i + 1].rank))

@@ -38,8 +38,7 @@ namespace CleverEdge
             {
                 var entry = entries[index];
                 var leaderboardEntryBehaviour = Instantiate(_leaderboardEntryPrefab, _entriesParent);
-                var rank = index + 1;
-                leaderboardEntryBehaviour.Set(entry, rank);
+                leaderboardEntryBehaviour.Set(entry, index);
                 leaderboardEntryBehaviour.OnSelectPlayer += OnSelectPlayerClick;
             }
         }

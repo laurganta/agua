@@ -38,6 +38,7 @@ namespace CleverEdge
         
         private float _currentHealth;
         private Quaternion _startRotation;
+        private Tweener _damagePunchTweener;
         
         private Action<EnemyBehaviour, bool> _onDeath;
 
@@ -119,7 +120,8 @@ namespace CleverEdge
             var hitEffect = Tier.ToHitEffectType();
             _vfxController.PlayEffect(hitEffect, hitPosition, Quaternion.identity);
             
-            _damageRoot.DOPunchScale(_punchScale, _punchDuration, _punchVibrato);
+            _damagePunchTweener?.Kill(true);
+            _damagePunchTweener = _damageRoot.DOPunchScale(_punchScale, _punchDuration, _punchVibrato);
         }
 
         private Tweener PlayDeathAnimation()
