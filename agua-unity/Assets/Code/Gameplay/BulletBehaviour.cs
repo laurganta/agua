@@ -3,13 +3,21 @@ using UnityEngine;
 
 namespace CleverEdge
 {
+    public enum BulletType
+    {
+        Default,
+        Extra,
+    }
+
     public class BulletBehaviour : MonoBehaviour
     {
         [Header("Config")]
+        [SerializeField] private BulletType _type;
         [SerializeField] private float _speed;
         [SerializeField] private float _lifetimeSeconds;
         [SerializeField] private float _damage;
-        
+        [SerializeField] private VFXEffectType _vfxEffectType;
+
         [Header("Collision")]
         [SerializeField] private LayerMask _hitMask;
         [SerializeField] private float _hitDistance;
@@ -20,6 +28,9 @@ namespace CleverEdge
 
         private VFXControllerBehaviour _vfxController;
         
+        public BulletType BulletType => _type;
+        public VFXEffectType VFXEffectType => _vfxEffectType;
+
         private void OnEnable()
         {
             _lifetimeTimer = 0f;

@@ -31,6 +31,7 @@ namespace CleverEdge
         [SerializeField] private Transform _spawnAreaCenter;
         [SerializeField] private Vector2 _spawnAreaSize;
         [SerializeField] private FlyTextControllerBehaviour _flyTextController;
+        [SerializeField] private CameraShakeBehaviour _cameraShakeBehaviour;
 
         [Header("Configuration - Extra Time")]
         [SerializeField] public int _extraTimeSeconds;
@@ -41,6 +42,7 @@ namespace CleverEdge
         [SerializeField] private float _bombDelaySeconds;
         [SerializeField] private float _bombPositionShakeStrength;
         [SerializeField] private float _bombScaleShakeStrength;
+        [SerializeField] private float _bombCameraShakeDuration;
 
         [Header("Configuration - Score Multiplier")] 
         [SerializeField] private float _scoreMultiplier;
@@ -108,14 +110,18 @@ namespace CleverEdge
                     break;
                 
                 case PowerUpType.Bomb:
-
                     StartCoroutine(ExplodeBombAfterSeconds(powerUp, _bombDelaySeconds));
                     
                     break;
                 
                 case PowerUpType.ScoreMultiplier:
-                    
                     _gameplayState.SetScoreMultiplier(_scoreMultiplier);
+                    
+                    ReleasePowerUp(powerUp);
+                    break;
+                
+                case PowerUpType.ExtraBullet:
+                    _playerBehaviour.IncreaseMaxBulletIndex();
                     
                     ReleasePowerUp(powerUp);
                     break;
@@ -147,6 +153,8 @@ namespace CleverEdge
             FindObjectsByType<EnemyBehaviour>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
                 .ToList()
                 .ForEach(enemy => enemy.Damage(1000000, enemy.transform.position));
+            
+            _cameraShakeBehaviour.Shake(_bombCameraShakeDuration);
         }
 
         private void OnPowerUpActiveDurationEnd(PowerUpBehaviour powerUp)

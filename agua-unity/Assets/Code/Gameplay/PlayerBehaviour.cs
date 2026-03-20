@@ -36,6 +36,7 @@ namespace CleverEdge
         
         private float _shootTimer;
         private bool _shooting;
+        private float _shootRateMultiplier;
         
         private Tweener _actorShootTween;
         private Tweener _canPunchTween;
@@ -93,7 +94,10 @@ namespace CleverEdge
         {
             _shooting = false;
             _shootTimer = 0;
+            _shootRateMultiplier = 1;
             SetLeftHandActive(false);
+            _leftGunBehaviour.PrepareForRound();
+            _rightGunBehaviour.PrepareForRound();
         }
 
         public void SetLeftHandActive(bool active)
@@ -101,6 +105,13 @@ namespace CleverEdge
             _leftGunBehaviour.gameObject.SetActive(active);
         }
 
+        public void IncreaseMaxBulletIndex()
+        {
+            _shootRateMultiplier = 2;
+            _rightGunBehaviour.IncreaseMaxBulletIndex();
+            _leftGunBehaviour.IncreaseMaxBulletIndex();
+        }
+        
         private void Shoot()
         {
             _actorShootTween?.Kill(true);
@@ -121,7 +132,6 @@ namespace CleverEdge
             GameDebug.Log($"Start shoot {_playerType}");
             _shooting = true;
             Shoot();
-
         }
         
         private void StopShoot(InputAction.CallbackContext obj)
@@ -168,14 +178,11 @@ namespace CleverEdge
             if (_shooting)
             {
                 _shootTimer += Time.deltaTime;
-                if (_shootTimer >= _shootRate)
+                if (_shootTimer >= _shootRate / _shootRateMultiplier)
                 {
                     Shoot();
                     _shootTimer = 0;
                 }
-            }
-            else
-            {
             }
         }
     }

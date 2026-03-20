@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983272a8c611db24bba61f76a7c1e7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletBehaviour
+  _type: 0
   _speed: 50
   _lifetimeSeconds: 3
   _damage: 1
+  _vfxEffectType: 6
   _hitMask:
     serializedVersion: 2
     m_Bits: 384

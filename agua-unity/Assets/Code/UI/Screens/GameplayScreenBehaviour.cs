@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CleverEdge
@@ -10,11 +12,14 @@ namespace CleverEdge
         [SerializeField] private TimerBehaviour _roundTimer;
         [SerializeField] private float _noActivityTutorialDelay;
         [SerializeField] private Animator _tutorialAnimator;
+        [SerializeField] private Animator _readySetGoAnimator;
 
         public int SecondsLeft => _roundTimer.SecondsLeft;
         
         private float _noActivityTimer;
-        
+
+        private bool _isPlaying;
+
         public void SetScore(float score)
         {
             _noActivityTimer = 0;
@@ -41,6 +46,9 @@ namespace CleverEdge
         
         private void Update()
         {
+            if (_isPlaying == false)
+                return;
+            
             _noActivityTimer += Time.deltaTime;
 
             if (_noActivityTimer > _noActivityTutorialDelay)
@@ -57,6 +65,37 @@ namespace CleverEdge
         public void PrepareForRound()
         {
             _scoreText.ResetMultiplier();
+            _isPlaying = false;
+            _readySetGoAnimator.gameObject.SetActive(false);
         }
+
+        public void StartPlaying()
+        {
+            _isPlaying = true;
+        }
+
+        public void PlayIntro(Action onCompleted)
+        {
+            StartCoroutine(PlayIntroCoroutine(onCompleted));
+        }
+
+        private IEnumerator PlayIntroCoroutine(Action onCompleted)
+        {
+            // _tutorialAnimator.SetTrigger(ShowHash);
+
+            Debug.Log($"Waiting for tutorial animation to finish. Length: {_tutorialAnimator.GetCurrentAnimatorStateInfo(0).length}");
+            yield return new WaitForSeconds(_tutorialAnimator.GetCurrentAnimatorStateInfo(0).length);
+            
+            _readySetGoAnimator.gameObject.SetActive(true);
+         
+            var animator = _readySetGoAnimator.GetComponent<Animator>();
+            animator.Play("ReadySetGo", 0, 0);
+
+            Debug.Log($"Waiting for ReadySetGo animation to finish. Length: {animator.GetCurrentAnimatorStateInfo(0).length}");
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
+            onCompleted.Invoke();
+        }
+
     }
 }

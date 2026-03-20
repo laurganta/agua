@@ -9,7 +9,7 @@ namespace CleverEdge
     {
         ExtraTime,
         Damage,
-        Speed,
+        ExtraBullet,
         ScoreMultiplier,
         Bomb,
         DoubleBarrel,

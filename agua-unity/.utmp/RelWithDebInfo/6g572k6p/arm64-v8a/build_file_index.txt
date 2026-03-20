@@ -1,0 +1,2 @@
+C:\Users\laurg\Work\Repos\agua\agua-unity\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\laurg\Work\Repos\agua\agua-unity\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

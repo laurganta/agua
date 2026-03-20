@@ -35,7 +35,6 @@ namespace CleverEdge
         
         private State _state;
         private float _roundTimer;
-        private float _startTimer;
         private float _currentRoundDuration;
         private float _currentScoreMultiplier;
 
@@ -80,7 +79,6 @@ namespace CleverEdge
                     _playerBehaviour.PrepareForRound();
                     _gameplayScreenBehaviour.PrepareForRound();
                     
-                    _startTimer = 0;
                     _roundTimer = 0;
                     _currentRoundDuration = _roundDuration;
                     _bossDefeated = false;
@@ -95,11 +93,6 @@ namespace CleverEdge
                     break;
                 case State.WaitingToStart:
                     
-                    // ToDo - gameplay intro 
-                    _startTimer += Time.deltaTime;
-                    
-                    if (_startTimer >= _waitingToStartDuration)
-                        ChangeState(State.Playing);
                     break;
                 case State.Playing:
                     _roundTimer += Time.deltaTime;
@@ -133,8 +126,10 @@ namespace CleverEdge
                 case State.Init:
                     break;
                 case State.WaitingToStart:
+                    _gameplayScreenBehaviour.PlayIntro(() => ChangeState(State.Playing));
                     break;
                 case State.Playing:
+                    _gameplayScreenBehaviour.StartPlaying();
                     _inputSystemActions.Enable();
                     _enemiesControllerBehaviour.StartSpawning();
                     _powerUpsControllerBehaviour.StartSpawning();
@@ -178,7 +173,7 @@ namespace CleverEdge
             
             _sessionData.Score += score;
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
-            _cameraShakeBehaviour.Shake();
+            _cameraShakeBehaviour.TriggerShake();
 
             var scoreText = "+" + ((int) score).ToString("0");
             _flyTextController.SpawnScoreFlyText(position, scoreText , enemy.scoreColor, enemy.scoreFlyTextSize);

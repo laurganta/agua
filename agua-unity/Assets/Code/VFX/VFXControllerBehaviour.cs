@@ -16,6 +16,7 @@ namespace CleverEdge
         BulletHit,
         PowerUpCollect,
         BombExplosion,
+        BulletBubblesExtra,
     }
 
     public static class VFXExtensions

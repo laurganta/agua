@@ -393,6 +393,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4288709068916962089, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288709068916962089, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288709068916962089, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288709068916962089, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288709068916962089, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6699564098276302653, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
       propertyPath: m_Name
       value: LeftHand_Gun
@@ -403,6 +423,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 65aa6f90f5e4c7d49b6289d60038d6c2, type: 2}
     - target: {fileID: 6744114130133421724, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 40b96b4474218ea47bad3e20598f91cd, type: 2}
+    - target: {fileID: 7220123306739934128, guid: eb6893033f90a1447b084a6954b90a50, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 40b96b4474218ea47bad3e20598f91cd, type: 2}
     m_RemovedComponents: []

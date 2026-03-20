@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 681957957872475345, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9238798
+      objectReference: {fileID: 0}
+    - target: {fileID: 681957957872475345, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.38268274
+      objectReference: {fileID: 0}
+    - target: {fileID: 681957957872475345, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 4762013278891425481, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -58,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: _isActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: _spawnLimit
@@ -76,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8008743819121218803, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ba4bee67d8b9f4c46859c55fc6257c6d, type: 2}
     - target: {fileID: 8008743819121218803, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 

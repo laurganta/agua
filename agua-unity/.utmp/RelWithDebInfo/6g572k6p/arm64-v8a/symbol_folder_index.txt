@@ -1,0 +1,1 @@
+C:\Users\laurg\Work\Repos\agua\agua-unity\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\6g572k6p\obj\arm64-v8a
