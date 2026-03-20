@@ -38,6 +38,11 @@ namespace CleverEdge
         public int AvatarIndex => _avatarBehaviour.AvatarIndex;
         public bool GdprAccepted => _gdprToggle.isOn;
         
+        public void SetStartWithoutRegistering(bool value)
+        {
+            _playWithoutRegistering = value;
+        }
+        
         private void Awake()
         {
             _registerButton.onClick.AddListener(OnRegisterButtonClick);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CleverEdge
 {
-    public class ScoreFlyTextBehaviour : MonoBehaviour
+    public class FlyTextBehaviour : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text;
         [SerializeField] private float _duration;
@@ -16,13 +16,13 @@ namespace CleverEdge
         private Tweener _moveTween;
         private Tweener _fadeTween;
         
-        public void SetScore(float score, Color color)
+        public void SetText(string text, Color color)
         {
-            _text.text = "+" + score.ToString("0");
+            _text.text = text;
             _text.color = color;
         }
 
-        public void PlayAnimation(Action<ScoreFlyTextBehaviour> onComplete)
+        public void PlayAnimation(Action<FlyTextBehaviour> onComplete)
         {
             _text.alpha = 1;
             

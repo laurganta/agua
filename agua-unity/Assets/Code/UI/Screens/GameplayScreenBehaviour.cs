@@ -23,6 +23,7 @@ namespace CleverEdge
 
         public void SetScoreAnimated(float score)
         {
+            _noActivityTimer = 0;
             scoreText.SetValueAnimated(score);
         }
         

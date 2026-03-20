@@ -24,12 +24,12 @@ namespace CleverEdge
         [SerializeField] private GameplayScreenBehaviour _gameplayScreenBehaviour;
         [SerializeField] private CameraShakeBehaviour _cameraShakeBehaviour;
         [SerializeField] private PowerUpsControllerBehaviour _powerUpsControllerBehaviour;
-        [SerializeField] private ScoreFlyTextControllerBehaviour _flyTextController;
+        [SerializeField] private FlyTextControllerBehaviour _flyTextController;
         
         [SerializeField] private float _roundDuration;
         [SerializeField] private float _waitingToEndDuration;
         [SerializeField] private float _waitingToStartDuration;
-
+        
         private InputSystem_Actions _inputSystemActions;
         
         private State _state;
@@ -42,6 +42,11 @@ namespace CleverEdge
         private SessionData _sessionData;
         public Action OnGameEnd;
 
+        public void SetRoundDuration(float duration)
+        {
+            _roundDuration = duration;
+        }
+        
         private void Awake()
         {
             _inputSystemActions = ServiceLocator.GetInstance<InputSystem_Actions>();
@@ -159,8 +164,9 @@ namespace CleverEdge
             _sessionData.Score += enemy.score;
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
             _cameraShakeBehaviour.Shake();
-            
-            _flyTextController.SpawnScoreFlyText(position, (int) enemy.score, enemy.scoreColor);
+
+            var scoreText = "+" + ((int) enemy.score).ToString("0");
+            _flyTextController.SpawnScoreFlyText(position, scoreText , enemy.scoreColor, enemy.scoreFlyTextSize);
             
             if (enemy.tier == EnemyTier.Boss)
                 _bossDefeated = true;

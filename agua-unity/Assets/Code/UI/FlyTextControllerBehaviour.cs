@@ -3,14 +3,13 @@ using UnityEngine.Pool;
 
 namespace CleverEdge
 {
-    public class ScoreFlyTextControllerBehaviour : MonoBehaviour
+    public class FlyTextControllerBehaviour : MonoBehaviour
     {
-        [SerializeField] private ScoreFlyTextBehaviour _scoreFlyTextPrefab;
-        [SerializeField] private Vector2 _scoreSizeRange;
+        [SerializeField] private FlyTextBehaviour _scoreFlyTextPrefab;
         [SerializeField] private Vector2 _scoreSizeReferenceRange;
         [SerializeField] private Vector3 _spawnOffset;
 
-        private ObjectPool<ScoreFlyTextBehaviour> _scoreFlyTextPool;
+        private ObjectPool<FlyTextBehaviour> _flyTextPool;
 
         private void Awake()
         {
@@ -19,7 +18,7 @@ namespace CleverEdge
 
         private void InitializePool()
         {
-            _scoreFlyTextPool = new ObjectPool<ScoreFlyTextBehaviour>(
+            _flyTextPool = new ObjectPool<FlyTextBehaviour>(
                 createFunc: () =>
                 {
                     var flyText = Instantiate(_scoreFlyTextPrefab, transform.position, Quaternion.Euler(45, 0, 0));
@@ -40,19 +39,18 @@ namespace CleverEdge
             );
         }
 
-        public void SpawnScoreFlyText(Vector3 position, int score, Color color)
+        public void SpawnScoreFlyText(Vector3 position, string text, Color color, float scale = 1)
         {
-            if (_scoreFlyTextPool == null)
+            if (_flyTextPool == null)
             {
                 InitializePool();
             }
             
-            var scoreFlyText = _scoreFlyTextPool.Get();
+            var scoreFlyText = _flyTextPool.Get();
             scoreFlyText.transform.position = position + _spawnOffset;
-            scoreFlyText.transform.localScale = Vector3.one * Mathf.Lerp(_scoreSizeRange.x, _scoreSizeRange.y, 
-                Mathf.InverseLerp(_scoreSizeReferenceRange.x, _scoreSizeReferenceRange.y, score));
-            scoreFlyText.SetScore(score, color);
-            scoreFlyText.PlayAnimation((flyText) => _scoreFlyTextPool.Release(flyText));
+            scoreFlyText.transform.localScale = Vector3.one * scale;
+            scoreFlyText.SetText(text, color);
+            scoreFlyText.PlayAnimation((flyText) => _flyTextPool.Release(flyText));
         }
     }
 }

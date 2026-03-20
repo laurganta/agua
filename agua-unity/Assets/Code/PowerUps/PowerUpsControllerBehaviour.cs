@@ -12,9 +12,12 @@ namespace CleverEdge
         [SerializeField] private float[] _spawnTimes;
         [SerializeField] private Transform _spawnAreaCenter;
         [SerializeField] private Vector2 _spawnAreaSize;
+        [SerializeField] private FlyTextControllerBehaviour _flyTextController;
 
         [Header("Configuration - Extra Time")]
         [SerializeField] public int _extraTimeSeconds;
+        [SerializeField] private Color _extraTimeFlyTextColor;
+        [SerializeField] private float _extraTimeFlyTextSize;
         
 
         private Dictionary<PowerUpType, PowerUpBehaviour> _powerUps;
@@ -23,7 +26,7 @@ namespace CleverEdge
         private float _spawnTimer;
         private int _currentSpawnIndex;
         
-        private List<PowerUpType> _spawnedPowerUps;
+        private Dictionary<PowerUpType, int> _spawnedPowerUps;
         private List<PowerUpType> _availablePowerUpTypesBuffer;
 
         private GameplayStateBehaviour _gameplayState;
@@ -31,7 +34,7 @@ namespace CleverEdge
         private void Awake()
         {
             _powerUps = new Dictionary<PowerUpType, PowerUpBehaviour>();
-            _spawnedPowerUps = new  List<PowerUpType>();
+            _spawnedPowerUps = new Dictionary<PowerUpType, int>();
             _availablePowerUpTypesBuffer = new List<PowerUpType>();
             
             foreach (var powerUpBehaviour in _powerUpsPrefabs)
@@ -59,6 +62,7 @@ namespace CleverEdge
             {
                 case PowerUpType.ExtraTime:
                     _gameplayState.AddExtraTime(_extraTimeSeconds);
+                    _flyTextController.SpawnScoreFlyText(powerUp.transform.position, $"+{_extraTimeSeconds}s", _extraTimeFlyTextColor, _extraTimeFlyTextSize);
                     break;
             }
         }
@@ -75,7 +79,8 @@ namespace CleverEdge
                 powerUp.transform.position = position;
                 powerUp.gameObject.SetActive(true);
                 
-                _spawnedPowerUps.Add(powerUpType);
+                _spawnedPowerUps.TryAdd(powerUpType, 0);
+                _spawnedPowerUps[powerUpType]++;
             }
         }
 
@@ -113,8 +118,8 @@ namespace CleverEdge
                 
                 _availablePowerUpTypesBuffer.Clear();
 
-                foreach (var powerUpType in _powerUps.Keys)
-                    if (_spawnedPowerUps.Contains(powerUpType) == false)
+                foreach (var (powerUpType, powerUp) in _powerUps)
+                    if (powerUp.IsActive && (_spawnedPowerUps.ContainsKey(powerUpType) == false || _spawnedPowerUps[powerUpType] < powerUp.LimitPerRound))
                         _availablePowerUpTypesBuffer.Add(powerUpType);
                 
                 if (_availablePowerUpTypesBuffer.Count == 0)

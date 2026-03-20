@@ -18,7 +18,7 @@ namespace CleverEdge
             _registerScreenBehaviour.OnBackButton += OnBackButtonClick;
             _registerScreenBehaviour.OnGDPRButton += OnGdprButtonClick;
         }
-
+        
         private void OnGdprButtonClick()
         {
             OnGDPRButton?.Invoke();

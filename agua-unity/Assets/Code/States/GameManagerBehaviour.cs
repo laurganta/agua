@@ -5,6 +5,22 @@ namespace CleverEdge
 {
     public class GameManagerBehaviour : MonoBehaviour
     {
+        [Header("Build Settings")]
+        [SerializeField] private float _roundDuration;
+        [SerializeField] private bool _startWithoutRegistering;
+        
+        [ContextMenu("PrepareBuild")]
+        public void PrepareBuild()
+        {
+            FindAnyObjectByType<MainMenuScreenBehaviour>(FindObjectsInactive.Include).gameObject.SetActive(false);
+            FindAnyObjectByType<RegisterScreenBehaviour>(FindObjectsInactive.Include).gameObject.SetActive(false);
+            FindAnyObjectByType<GameplayScreenBehaviour>(FindObjectsInactive.Include).gameObject.SetActive(false);
+            FindAnyObjectByType<GDPRScreenBehaviour>(FindObjectsInactive.Include).gameObject.SetActive(false);
+
+            FindAnyObjectByType<GameplayStateBehaviour>(FindObjectsInactive.Include).SetRoundDuration(_roundDuration);
+            FindAnyObjectByType<RegisterScreenBehaviour>(FindObjectsInactive.Include).SetStartWithoutRegistering(_startWithoutRegistering);
+        }
+
         private enum GameState
         {
             MainMenu,
@@ -15,6 +31,7 @@ namespace CleverEdge
         }
         
         
+        [Header("References")]
         [SerializeField] private MainMenuStateBehaviour _mainMenuStateBehaviour;
         [SerializeField] private GameplayStateBehaviour _gameplayStateBehaviour;
         [SerializeField] private EndScreenStateBehaviour _endScreenStateBehaviour;
