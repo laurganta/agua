@@ -97,8 +97,20 @@ PrefabInstance:
       value: PowerUp_DoubleBarrel
       objectReference: {fileID: 0}
     - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: _isActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: _powerUpType
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: _limitPerRound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7793327660134553790, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
+      propertyPath: _collectionLimit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8008743819121218803, guid: 1ee0de74de49b6a4e985ae3ea9fd0853, type: 3}
       propertyPath: m_Materials.Array.size

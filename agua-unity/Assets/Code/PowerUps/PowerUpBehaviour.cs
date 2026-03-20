@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CleverEdge
 {
@@ -18,7 +19,8 @@ namespace CleverEdge
     {
         [Header("Configuration")]
         [SerializeField] private PowerUpType _powerUpType;
-        [SerializeField] private int _limitPerRound;
+        [SerializeField] private int _spawnLimit;
+        [SerializeField] private int _collectionLimit;
 
         [SerializeField] private bool _isActive;
         
@@ -41,8 +43,9 @@ namespace CleverEdge
 
         public bool IsActive => _isActive;
         
-        public int LimitPerRound => _limitPerRound;
-        
+        public int SpawnLimit => _spawnLimit;
+        public int CollectionLimit => _collectionLimit;
+
         public void Initialize(Action<PowerUpBehaviour> onCollect,  Action<PowerUpBehaviour> onActiveDurationEnd)
         {
             _onActiveDurationEnd = onActiveDurationEnd;
@@ -89,6 +92,7 @@ namespace CleverEdge
         public void Collect()
         {
             _onCollect?.Invoke(this);
+            ServiceLocator.GetInstance<VFXControllerBehaviour>().PlayEffect(VFXEffectType.PowerUpCollect, transform.position, Quaternion.identity);
         }
     }
 }

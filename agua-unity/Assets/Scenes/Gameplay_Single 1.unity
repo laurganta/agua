@@ -1898,10 +1898,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
+  m_fontSize: 43.65
   m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -5468,6 +5468,7 @@ MonoBehaviour:
   _cameraShakeBehaviour: {fileID: 330585549}
   _powerUpsControllerBehaviour: {fileID: 1133865610}
   _flyTextController: {fileID: 1844983068}
+  _playerBehaviour: {fileID: 1344164006}
   _roundDuration: 30
   _waitingToEndDuration: 3
   _waitingToStartDuration: 1
@@ -6383,10 +6384,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
+  m_fontSize: 43.65
   m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -7270,10 +7271,8 @@ MonoBehaviour:
   - {fileID: 7647383196913307389, guid: 9296d04b4caced44e9cd648d8c5f824d, type: 3}
   - {fileID: 7647383196913307389, guid: 5f44529a083255940b7a59b29a7eed5e, type: 3}
   _powerUpsParent: {fileID: 403148067}
-  _spawnTimes:
-  - 8
-  - 16
-  - 24
+  _firstSpawnDelay: 5
+  _spawnIntervalRange: {x: 4, y: 8}
   _spawnAreaCenter: {fileID: 403148067}
   _spawnAreaSize: {x: 35, y: 50}
   _flyTextController: {fileID: 1844983068}
@@ -8478,6 +8477,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4544046313662607765, guid: fbe0f0ea21ca3964199c0c172230998c, type: 3}
   m_PrefabInstance: {fileID: 6907269507444509908}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1344164006 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5048541004362916561, guid: fbe0f0ea21ca3964199c0c172230998c, type: 3}
+  m_PrefabInstance: {fileID: 6907269507444509908}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea34b0b304bc1b4eb1609c40ecbb974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.PlayerBehaviour
 --- !u!1 &1362002621
 GameObject:
   m_ObjectHideFlags: 0
@@ -9622,10 +9632,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
+  m_fontSize: 43.65
   m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -10572,6 +10582,10 @@ MonoBehaviour:
     prefab: {fileID: -2333686171268086133, guid: b2550afb81a9ef44da18a73dd14ba21b, type: 3}
     startPoolCapacity: 10
     maxPoolCapacity: 100
+  - effectType: 8
+    prefab: {fileID: 5052540274515193354, guid: 1db7d4b95c2f7ad4285ce8ed0d0a74f2, type: 3}
+    startPoolCapacity: 2
+    maxPoolCapacity: 3
 --- !u!1 &1534800833
 GameObject:
   m_ObjectHideFlags: 0
@@ -11783,7 +11797,7 @@ MonoBehaviour:
     maxPoolCapacity: 100
     spawnChance: 1
     spawnCooldownSeconds: 0
-    spawnDelaySeconds: 5
+    spawnDelaySeconds: 3
     score: 30
     scoreColor: {r: 1, g: 0.7095657, b: 0.6666667, a: 1}
     scoreFlyTextSize: 2
@@ -11799,11 +11813,11 @@ MonoBehaviour:
     scoreFlyTextSize: 5
   - tier: 3
     prefab: {fileID: 4157509982130224351, guid: 02e8855ba54c2444c85d7282683fe8f8, type: 3}
-    startPoolCapacity: 1
-    maxPoolCapacity: 1
+    startPoolCapacity: 10
+    maxPoolCapacity: 100
     spawnChance: 3
     spawnCooldownSeconds: 0
-    spawnDelaySeconds: 10
+    spawnDelaySeconds: 8
     score: 20
     scoreColor: {r: 0.85780036, g: 0.6556604, b: 1, a: 1}
     scoreFlyTextSize: 2

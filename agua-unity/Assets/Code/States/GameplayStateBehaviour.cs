@@ -25,6 +25,7 @@ namespace CleverEdge
         [SerializeField] private CameraShakeBehaviour _cameraShakeBehaviour;
         [SerializeField] private PowerUpsControllerBehaviour _powerUpsControllerBehaviour;
         [SerializeField] private FlyTextControllerBehaviour _flyTextController;
+        [SerializeField] private PlayerBehaviour _playerBehaviour;
         
         [SerializeField] private float _roundDuration;
         [SerializeField] private float _waitingToEndDuration;
@@ -49,11 +50,11 @@ namespace CleverEdge
         
         private void Awake()
         {
+            ServiceLocator.AddInstance(this);
+            
             _inputSystemActions = ServiceLocator.GetInstance<InputSystem_Actions>();
-            
+
             _enemiesControllerBehaviour.Initialize(OnEnemyDefeated);
-            
-            _powerUpsControllerBehaviour.Initialize(this);
         }
 
         private void OnEnable()
@@ -74,6 +75,7 @@ namespace CleverEdge
             switch (_state)
             {
                 case State.Init:
+                    _playerBehaviour.PrepareForRound();
                     _startTimer = 0;
                     _roundTimer = 0;
                     _currentRoundDuration = _roundDuration;

@@ -14,6 +14,7 @@ namespace CleverEdge
         EnemyHit_Boss,
         BulletBubbles,
         BulletHit,
+        PowerUpCollect,
     }
 
     public static class VFXExtensions
@@ -59,6 +60,8 @@ namespace CleverEdge
 
         private void Awake()
         {
+            ServiceLocator.AddInstance(this);
+            
             InitializePools();
         }
 

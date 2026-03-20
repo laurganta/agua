@@ -25,7 +25,7 @@ namespace CleverEdge
         
         public void AddInstance<T>(T instance)
         {
-            _instances.Add(typeof(T), instance);
+            _instances[typeof(T)] = instance;
         }
         
         public T GetInstance<T>()

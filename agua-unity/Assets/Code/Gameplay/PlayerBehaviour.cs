@@ -2,9 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Pool;
 using Quaternion = UnityEngine.Quaternion;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 namespace CleverEdge
@@ -16,92 +14,37 @@ namespace CleverEdge
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private Camera _aimCamera;
         [SerializeField] private Transform _root;
-        [SerializeField] private VFXControllerBehaviour _vfxControllerBehaviour;
-        
-        [Header("Bullet")]
-        [SerializeField] private GameObject _bulletPrefab;
-        [SerializeField] private Transform _bulletSpawnPoint;
-        [SerializeField] private int _poolSize;
-        [SerializeField] private float _shootRate;
-        [SerializeField] private float _shootRandomAngle;
-        [SerializeField] private float _scaleRandom;
 
-        [Header("Gun")] 
+        [SerializeField] private GunBehaviour _rightGunBehaviour;
+        [SerializeField] private GunBehaviour _leftGunBehaviour;
+        
         [SerializeField] private float _fixedAimZ;
         [SerializeField] private Transform _actorRoot;
         [SerializeField] private Vector3 _actorPunchScale;
         [SerializeField] private float _actorPunchDuration;
         [SerializeField] private int _actorPunchVibrato;
-        [SerializeField] private Transform _gunRoot;
-        [SerializeField] private Vector3 _gunPunchScale;
-        [SerializeField] private float _gunPunchDuration;
-        [SerializeField] private int _gunPunchVibrato;
-        [SerializeField] private float _gunPunchRotationAngle;
-        [SerializeField] private ParticleSystem _shoortParticleSystem;
         
         [Header("Can")]
         [SerializeField] private Transform _canRoot;
         [SerializeField] private float _canShakeAngle;
         [SerializeField] private float _canShakeDuration;
         [SerializeField] private int _canPunchVibrato;
+
+        [SerializeField] private float _shootRate;
         
         private InputSystem_Actions _inputSystemActions;
         
-        private ObjectPool<BulletBehaviour> _bulletPool;
         private float _shootTimer;
         private bool _shooting;
         
-        private Tweener _gunShootTween;
-        private Tweener _gShootRotationTween;
         private Tweener _actorShootTween;
         private Tweener _canPunchTween;
 
         private void Awake()
         {
+            ServiceLocator.AddInstance(this);
+            
             _inputSystemActions = ServiceLocator.GetInstance<InputSystem_Actions>();
-
-            InitializePool();
-        }
-
-        private void InitializePool()
-        {
-            _bulletPool = new ObjectPool<BulletBehaviour>(
-                createFunc: () =>
-                {
-                    var bullet = Instantiate(_bulletPrefab, _bulletSpawnPoint.position, Quaternion.identity);
-                    bullet.transform.SetParent(transform);
-                    bullet.transform.forward = transform.forward;
-                    var bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
-                    bulletBehaviour.Initialize(_vfxControllerBehaviour, OnBulletDestroy);
-                    return bulletBehaviour;
-                },
-                actionOnGet: (bullet) =>
-                {
-                    bullet.transform.position = _bulletSpawnPoint.position;
-                    bullet.transform.rotation = Quaternion.identity;
-                    bullet.transform.localScale = Vector3.one + Vector3.one * Random.Range(-_scaleRandom, _scaleRandom);
-                    
-                    // set bullet random forward with angle to player forward
-                    var angle = Random.Range(-_shootRandomAngle, _shootRandomAngle);
-                    var rotation = Quaternion.Euler(0, angle, 0);
-                    bullet.transform.forward = rotation * _root.forward;
-                    
-                    bullet.gameObject.SetActive(true);
-                },
-                actionOnRelease: (bullet) =>
-                {
-                    bullet.gameObject.SetActive(false);
-                },
-                actionOnDestroy: (bullet) => { Destroy(bullet.gameObject); },
-                collectionCheck: false,
-                defaultCapacity: 10,
-                maxSize: 100
-            );
-        }
-
-        private void OnBulletDestroy(BulletBehaviour bullet)
-        {
-            _bulletPool.Release(bullet);
         }
 
         private void OnEnable()
@@ -145,23 +88,32 @@ namespace CleverEdge
                     throw new ArgumentOutOfRangeException();
             }
         }
+        
+        public void PrepareForRound()
+        {
+            _shooting = false;
+            _shootTimer = 0;
+            SetLeftHandActive(false);
+        }
+
+        public void SetLeftHandActive(bool active)
+        {
+            _leftGunBehaviour.gameObject.SetActive(active);
+        }
 
         private void Shoot()
         {
             _actorShootTween?.Kill(true);
-            _gunShootTween?.Kill(true);
-            _gShootRotationTween?.Kill(true);
             _canPunchTween?.Kill(true);
 
             _actorShootTween = _actorRoot.DOPunchPosition(_actorPunchScale, _actorPunchDuration, _actorPunchVibrato);
-            _gunShootTween = _gunRoot.DOPunchScale(_gunPunchScale, _gunPunchDuration, _gunPunchVibrato);
-            _gShootRotationTween = _gunRoot.DOShakeRotation(_gunPunchDuration, Vector3.right * -_gunPunchRotationAngle, _gunPunchVibrato);
             _canPunchTween = _canRoot.DOShakeRotation(_canShakeDuration, Vector3.one * -_canShakeAngle, _canPunchVibrato);
+
+            if (_rightGunBehaviour.isActiveAndEnabled)
+                _rightGunBehaviour.Shoot();
             
-            var bullet = _bulletPool.Get();
-            _vfxControllerBehaviour.PlayEffect(VFXEffectType.BulletBubbles, bullet.transform.position, Quaternion.identity, bullet.transform);
-            
-            _shoortParticleSystem.Play();
+            if (_leftGunBehaviour.isActiveAndEnabled)
+                _leftGunBehaviour.Shoot();
         }
 
         private void StartShoot(InputAction.CallbackContext obj)

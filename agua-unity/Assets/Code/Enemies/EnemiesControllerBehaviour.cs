@@ -93,7 +93,9 @@ namespace CleverEdge
                 actionOnDestroy: (enemy) =>
                 {
                     if (enemy)
+                    {
                         Destroy(enemy.gameObject);
+                    }
                 },
                 collectionCheck: false,
                 defaultCapacity: startCapacity,

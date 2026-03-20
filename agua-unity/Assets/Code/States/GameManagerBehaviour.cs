@@ -56,7 +56,7 @@ namespace CleverEdge
                 {GameState.Register, _registerStateBehaviour},
                 {GameState.GDPR, _gdprStateBehaviour},
             };
-
+            
             _mainMenuStateBehaviour.OnPlay += OnPlay;
             _gameplayStateBehaviour.OnGameEnd += ToMainMenu;
             _endScreenStateBehaviour.OnReturnToMainMenu += ToMainMenu;
