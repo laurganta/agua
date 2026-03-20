@@ -26,7 +26,7 @@ namespace CleverEdge
         [SerializeField] private PowerUpsControllerBehaviour _powerUpsControllerBehaviour;
         [SerializeField] private ScoreFlyTextControllerBehaviour _flyTextController;
         
-        [SerializeField] private float _roundDuration2;
+        [SerializeField] private float _roundDuration;
         [SerializeField] private float _waitingToEndDuration;
         [SerializeField] private float _waitingToStartDuration;
 
@@ -71,6 +71,7 @@ namespace CleverEdge
                 case State.Init:
                     _startTimer = 0;
                     _roundTimer = 0;
+                    _currentRoundDuration = _roundDuration;
                     _bossDefeated = false;
                     
                     _sessionData = new SessionData();

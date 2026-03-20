@@ -1298,7 +1298,6 @@ MonoBehaviour:
   _randomAvatarButton: {fileID: 790710430}
   _backbutton: {fileID: 667136498}
   _gdprButton: {fileID: 1940745920}
-  _selectPlayerButton: {fileID: 0}
   _avatarBehaviour: {fileID: 261509600}
   _nameField: {fileID: 1417328675}
   _phoneField: {fileID: 1972039654}
@@ -2058,7 +2057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &362530694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2144,7 +2143,7 @@ Transform:
   m_GameObject: {fileID: 372292092}
   serializedVersion: 2
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: -9.2, z: 32.8}
+  m_LocalPosition: {x: 0, y: -15.16, z: 32.8}
   m_LocalScale: {x: 73.22272, y: 73.22272, z: 73.22272}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5486,7 +5485,7 @@ MonoBehaviour:
   _cameraShakeBehaviour: {fileID: 330585549}
   _powerUpsControllerBehaviour: {fileID: 1133865610}
   _flyTextController: {fileID: 1844983068}
-  _roundDuration2: 0
+  _roundDuration: 30
   _waitingToEndDuration: 3
   _waitingToStartDuration: 1
 --- !u!4 &874770835 stripped
@@ -7604,7 +7603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202115784
 Transform:
   m_ObjectHideFlags: 0
@@ -8366,7 +8365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1362002622
 Transform:
   m_ObjectHideFlags: 0
@@ -8966,8 +8965,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -36.7103, y: -25.059784}
-  m_SizeDelta: {x: -73.5339, y: 61.8053}
+  m_AnchoredPosition: {x: 0.028381348, y: -25.059784}
+  m_SizeDelta: {x: -0.05658, y: 61.8053}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1417328675
 MonoBehaviour:
@@ -12949,7 +12948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1880721699
 Transform:
   m_ObjectHideFlags: 0
@@ -24987,7 +24986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544046313662607765, guid: fbe0f0ea21ca3964199c0c172230998c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.85
+      value: -13.2
       objectReference: {fileID: 0}
     - target: {fileID: 4544046313662607765, guid: fbe0f0ea21ca3964199c0c172230998c, type: 3}
       propertyPath: m_LocalRotation.w
