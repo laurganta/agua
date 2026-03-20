@@ -15,8 +15,11 @@ namespace CleverEdge
         [SerializeField] private Vector2 _spawnIntervalRange;
         [SerializeField] private Transform _enemiesSpawnCenter;
         [SerializeField] private Vector2 _spawnAreaSize;
+        [SerializeField] private Transform[] _dummyEnemiesPosition;
 
         private Dictionary<EnemyTier, ObjectPool<EnemyBehaviour>> _enemiesPools;
+        
+        private List<EnemyBehaviour> _activeEnemies;
         
         private bool _running;
 
@@ -27,9 +30,13 @@ namespace CleverEdge
 
         private float _currentRoundTime;
         
+        public int ActiveEnemiesCount => _activeEnemies.Count;
+        
         private void Awake()
         {
             _enemiesPools = new Dictionary<EnemyTier, ObjectPool<EnemyBehaviour>>();
+            _activeEnemies = new List<EnemyBehaviour>();
+            
             foreach (var enemy in _enemies)
             {
                 var pool = CreateEnemyPool(enemy.tier, enemy.prefab, enemy.startPoolCapacity, enemy.maxPoolCapacity);
@@ -55,7 +62,7 @@ namespace CleverEdge
                     var enemy = Instantiate(prefab.gameObject).GetComponent<EnemyBehaviour>();
                     enemy.transform.SetParent(transform);
                     enemy.gameObject.SetActive(false);
-                    enemy.Initialize(tier, OnEnemyDefeated, _vfxControllerBehaviour);
+                    enemy.Initialize(tier, OnEnemyDefeated);
                     return enemy;
                 },
                 actionOnGet: (enemy) =>
@@ -71,7 +78,7 @@ namespace CleverEdge
                     {
                         enemy.transform.position = GetBossSpawnPosition();
                     }
-                    else
+                    else if (enemy.Tier == EnemyTier.Rogue)
                     {
                         var randomPosition = _enemiesSpawnCenter.position + new Vector3(
                             Random.Range(-_spawnAreaSize.x / 2, _spawnAreaSize.x / 2),
@@ -81,14 +88,18 @@ namespace CleverEdge
                         enemy.transform.position = randomPosition;
                         enemy.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
                         enemy.HideAfterSeconds(2);
+                    } else if (enemy.Tier == EnemyTier.Dummy)
+                    {
                     }
 
                     enemy.Reset();
+                    _activeEnemies.Add(enemy);
                 },
                 actionOnRelease: (enemy) =>
                 {
                     enemy.gameObject.SetActive(false); 
                     _movementPathControllerBehaviour.FreePath(enemy.GetMovementPath());
+                    _activeEnemies.Remove(enemy);
                 },
                 actionOnDestroy: (enemy) =>
                 {
@@ -138,9 +149,9 @@ namespace CleverEdge
             }
         }
         
-        private void SpawnEnemy(EnemyTier tier)
+        private EnemyBehaviour SpawnEnemy(EnemyTier tier)
         {
-            _enemiesPools[tier].Get();
+            return _enemiesPools[tier].Get();
         }
         
         private Vector3 GetBossSpawnPosition()
@@ -186,6 +197,15 @@ namespace CleverEdge
 
             foreach (var enemy in activeEnemies)
                 _enemiesPools[enemy.Tier].Release(enemy);
+        }
+        
+        public void SpawnTutorialEnemies()
+        {
+            foreach (var dummyPosition in _dummyEnemiesPosition)
+            {
+                var dummy = SpawnEnemy(EnemyTier.Dummy);
+                dummy.transform.position = dummyPosition.position;
+            }
         }
     }
 }

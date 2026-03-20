@@ -43,6 +43,7 @@ namespace CleverEdge
         [SerializeField] private float _bombPositionShakeStrength;
         [SerializeField] private float _bombScaleShakeStrength;
         [SerializeField] private float _bombCameraShakeDuration;
+        [SerializeField] private float _bombCameraShakeMagnitude;
 
         [Header("Configuration - Score Multiplier")] 
         [SerializeField] private float _scoreMultiplier;
@@ -154,7 +155,7 @@ namespace CleverEdge
                 .ToList()
                 .ForEach(enemy => enemy.Damage(1000000, enemy.transform.position));
             
-            _cameraShakeBehaviour.Shake(_bombCameraShakeDuration);
+            _cameraShakeBehaviour.Shake(_bombCameraShakeDuration, _bombCameraShakeMagnitude);
         }
 
         private void OnPowerUpActiveDurationEnd(PowerUpBehaviour powerUp)

@@ -22,6 +22,6 @@ namespace CleverEdge
         [Header("Score")]
         public float score;
         public Color scoreColor;
-        public int scoreFlyTextSize;
+        public float scoreFlyTextSize;
     }
 }

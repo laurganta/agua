@@ -8,7 +8,8 @@ namespace CleverEdge
         private enum State
         {
             Init,
-            WaitingToStart,
+            Tutorial,
+            Intro,
             Playing,
             Boss,
             WaitingToEnd,
@@ -20,23 +21,30 @@ namespace CleverEdge
             public float Score;
         }
 
+        [Header("References")]
         [SerializeField] private EnemiesControllerBehaviour _enemiesControllerBehaviour;
         [SerializeField] private GameplayScreenBehaviour _gameplayScreenBehaviour;
-        [SerializeField] private CameraShakeBehaviour _cameraShakeBehaviour;
         [SerializeField] private PowerUpsControllerBehaviour _powerUpsControllerBehaviour;
         [SerializeField] private FlyTextControllerBehaviour _flyTextController;
         [SerializeField] private PlayerBehaviour _playerBehaviour;
+
+        [Header("Tutorial")] 
+        [SerializeField] private float _tutorialDummyEnemiesDelay;
+        [SerializeField] private float _tutorialFingerDelay;
         
+        [Header("Round Settings")]
         [SerializeField] private float _roundDuration;
         [SerializeField] private float _waitingToEndDuration;
         [SerializeField] private float _waitingToStartDuration;
-        
+
         private InputSystem_Actions _inputSystemActions;
         
         private State _state;
         private float _roundTimer;
+        private float _currentStateTimer;
         private float _currentRoundDuration;
         private float _currentScoreMultiplier;
+        private bool _hasSeenDummyTutorialEnemies;
 
         private bool _bossDefeated;
 
@@ -70,6 +78,8 @@ namespace CleverEdge
                 _gameplayScreenBehaviour.gameObject.SetActive(false);
         }
 
+        private bool _hasSeenTutorialFinger;
+        
         private void Update()
         {
             switch (_state)
@@ -83,15 +93,45 @@ namespace CleverEdge
                     _currentRoundDuration = _roundDuration;
                     _bossDefeated = false;
                     _currentScoreMultiplier = 1;
+                    _currentStateTimer = 0;
+                    _hasSeenDummyTutorialEnemies = false;
+                    _hasSeenTutorialFinger = false;
                     
                     _sessionData = new SessionData();
                     _gameplayScreenBehaviour.SetScore(_sessionData.Score);
                     _gameplayScreenBehaviour.SetTimeLeft(_currentRoundDuration - _roundTimer);
                     
-                    ChangeState(State.WaitingToStart);
+                    ChangeState(State.Tutorial);
                     
                     break;
-                case State.WaitingToStart:
+                
+                case State.Tutorial:
+
+                    if (_hasSeenDummyTutorialEnemies == false)
+                    {
+                        _currentStateTimer += Time.deltaTime;
+                        if (_currentStateTimer > _tutorialDummyEnemiesDelay)
+                        {
+                            _enemiesControllerBehaviour.SpawnTutorialEnemies();
+                            _hasSeenDummyTutorialEnemies = true;
+                        }
+                    } else if (_enemiesControllerBehaviour.ActiveEnemiesCount == 0)
+                        ChangeState(State.Intro);
+                    else if (_hasSeenTutorialFinger == false)
+                    {
+                        _currentStateTimer += Time.deltaTime;
+                        if (_currentStateTimer >= _tutorialFingerDelay)
+                        {
+                            _gameplayScreenBehaviour.PlayTutorialFinger();
+                            _hasSeenTutorialFinger = true;
+                        }
+                    }
+
+                    break;
+                
+                case State.Intro:
+                    if (_gameplayScreenBehaviour.IsPlayingInto == false)
+                        ChangeState(State.Playing);
                     
                     break;
                 case State.Playing:
@@ -121,25 +161,34 @@ namespace CleverEdge
         {
             _state = state;
 
+            GameDebug.Log($"GameplayState: {state}.");
             switch (_state)
             {
                 case State.Init:
                     break;
-                case State.WaitingToStart:
-                    _gameplayScreenBehaviour.PlayIntro(() => ChangeState(State.Playing));
+                
+                case State.Tutorial:
+                    
                     break;
+                
+                case State.Intro:
+                    _gameplayScreenBehaviour.PlayIntro();
+                    break;
+                
                 case State.Playing:
                     _gameplayScreenBehaviour.StartPlaying();
                     _inputSystemActions.Enable();
                     _enemiesControllerBehaviour.StartSpawning();
                     _powerUpsControllerBehaviour.StartSpawning();
                     break;
+                
                 case State.Boss:
                     _gameplayScreenBehaviour.SetTimeLeft(0);
                     _enemiesControllerBehaviour.Stop();
                     _powerUpsControllerBehaviour.Stop();
                     _enemiesControllerBehaviour.SpawnBoss();
                     break;
+                
                 case State.WaitingToEnd:
                     _roundTimer = 0;
                     _enemiesControllerBehaviour.ClearRemainingEnemies();
@@ -147,8 +196,6 @@ namespace CleverEdge
                     break;
                 
                 case State.End:
-                    
-                    GameDebug.Log("Win!");
                     
                     LeaderboardState.Provider.SetEntry(
                         new LeaderboardEntry(Player.Current, Mathf.FloorToInt(_sessionData.Score), DateTime.Now));
@@ -160,6 +207,7 @@ namespace CleverEdge
                     throw new ArgumentOutOfRangeException();
             }
         }
+
 
         public void SetScoreMultiplier(float scoreMultiplier)
         {
@@ -173,7 +221,6 @@ namespace CleverEdge
             
             _sessionData.Score += score;
             _gameplayScreenBehaviour.SetScoreAnimated(_sessionData.Score);
-            _cameraShakeBehaviour.TriggerShake();
 
             var scoreText = "+" + ((int) score).ToString("0");
             _flyTextController.SpawnScoreFlyText(position, scoreText , enemy.scoreColor, enemy.scoreFlyTextSize);

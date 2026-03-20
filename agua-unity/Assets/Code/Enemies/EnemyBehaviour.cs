@@ -27,6 +27,11 @@ namespace CleverEdge
         [SerializeField] private float _deathAnimationScale;
         [SerializeField] private float _deathAnimationRotation;
         
+        
+        [Header("Death Camera Shake")]
+        [SerializeField] private float _deathCameraShakeDuration;
+        [SerializeField] private float _deathCameraShakeMagnitude;
+        
         [Header("Hide Animation")]
         [SerializeField] private AnimationCurve _hideAnimationCurve;
         [SerializeField] private float _hideAnimationDuration;
@@ -43,16 +48,18 @@ namespace CleverEdge
         private Action<EnemyBehaviour, bool> _onDeath;
 
         private VFXControllerBehaviour _vfxController;
+        private CameraShakeBehaviour _cameraShakeBehaviour;
         
         public EnemyTier Tier { get; private set; }
 
         public void Initialize(EnemyTier tier, 
-            Action<EnemyBehaviour, bool> onDeath,
-            VFXControllerBehaviour vfxController)
+            Action<EnemyBehaviour, bool> onDeath)
         {
             _onDeath = onDeath;
             Tier = tier;
-            _vfxController = vfxController;
+            
+            _vfxController = ServiceLocator.GetInstance<VFXControllerBehaviour>();
+            _cameraShakeBehaviour = ServiceLocator.GetInstance<CameraShakeBehaviour>();
             
             _startRotation = _inOutAnimations.localRotation;
             
@@ -90,6 +97,8 @@ namespace CleverEdge
                     GameDebug.Log($"{Time.frameCount} Death animation completed, invoking death callback");
                     _onDeath?.Invoke(this, true);
                 };
+                
+                _cameraShakeBehaviour.Shake(_deathCameraShakeDuration, _deathCameraShakeMagnitude);
             }
             else
             {

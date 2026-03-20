@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,10 +14,12 @@ namespace CleverEdge
         [SerializeField] private Animator _readySetGoAnimator;
 
         public int SecondsLeft => _roundTimer.SecondsLeft;
-        
+        public bool IsPlayingInto => _isPlayingIntro;
+
         private float _noActivityTimer;
 
         private bool _isPlaying;
+        private bool _isPlayingIntro;
 
         public void SetScore(float score)
         {
@@ -66,6 +67,7 @@ namespace CleverEdge
         {
             _scoreText.ResetMultiplier();
             _isPlaying = false;
+            _isPlayingIntro = false;
             _readySetGoAnimator.gameObject.SetActive(false);
         }
 
@@ -74,16 +76,21 @@ namespace CleverEdge
             _isPlaying = true;
         }
 
-        public void PlayIntro(Action onCompleted)
+        public void PlayTutorialFinger()
         {
-            StartCoroutine(PlayIntroCoroutine(onCompleted));
+            _tutorialAnimator.gameObject.SetActive(true);
+            _tutorialAnimator.SetTrigger(ShowHash);
         }
 
-        private IEnumerator PlayIntroCoroutine(Action onCompleted)
+        public void PlayIntro()
         {
-            // _tutorialAnimator.SetTrigger(ShowHash);
+            StartCoroutine(PlayIntroCoroutine());
+        }
 
-            Debug.Log($"Waiting for tutorial animation to finish. Length: {_tutorialAnimator.GetCurrentAnimatorStateInfo(0).length}");
+        private IEnumerator PlayIntroCoroutine()
+        {
+            _isPlayingIntro = true;
+
             yield return new WaitForSeconds(_tutorialAnimator.GetCurrentAnimatorStateInfo(0).length);
             
             _readySetGoAnimator.gameObject.SetActive(true);
@@ -91,11 +98,9 @@ namespace CleverEdge
             var animator = _readySetGoAnimator.GetComponent<Animator>();
             animator.Play("ReadySetGo", 0, 0);
 
-            Debug.Log($"Waiting for ReadySetGo animation to finish. Length: {animator.GetCurrentAnimatorStateInfo(0).length}");
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-            onCompleted.Invoke();
+            _isPlayingIntro = false;
         }
-
     }
 }

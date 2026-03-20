@@ -84,6 +84,14 @@ PrefabInstance:
       propertyPath: _startHealth
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: _deathCameraShakeDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: _deathCameraShakeMagnitude
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6830962705573921314, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

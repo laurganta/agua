@@ -6,5 +6,6 @@ namespace CleverEdge
         Elite,
         Boss,
         Rogue,
+        Dummy,
     }
 }

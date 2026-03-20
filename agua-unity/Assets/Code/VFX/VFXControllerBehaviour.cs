@@ -17,6 +17,10 @@ namespace CleverEdge
         PowerUpCollect,
         BombExplosion,
         BulletBubblesExtra,
+        EnemyExplosion_Rogue,
+        EnemyExplosion_Dummy,
+        EnemyHit_Rogue,
+        EnemyHit_Dummy,
     }
 
     public static class VFXExtensions
@@ -28,6 +32,9 @@ namespace CleverEdge
                 EnemyTier.Default => VFXEffectType.EnemyExplosion_Default,
                 EnemyTier.Elite => VFXEffectType.EnemyExplosion_Elite,
                 EnemyTier.Boss => VFXEffectType.EnemyExplosion_Boss,
+                EnemyTier.Rogue => VFXEffectType.EnemyExplosion_Rogue,
+                EnemyTier.Dummy => VFXEffectType.EnemyExplosion_Dummy,
+                
                 _ => VFXEffectType.EnemyExplosion_Default
             };
         }
@@ -39,6 +46,9 @@ namespace CleverEdge
                 EnemyTier.Default => VFXEffectType.EnemyHit_Default,
                 EnemyTier.Elite => VFXEffectType.EnemyHit_Elite,
                 EnemyTier.Boss => VFXEffectType.EnemyHit_Boss,
+                EnemyTier.Rogue => VFXEffectType.EnemyHit_Rogue,
+                EnemyTier.Dummy => VFXEffectType.EnemyHit_Dummy,
+                
                 _ => VFXEffectType.EnemyHit_Default
             };
         }
@@ -54,6 +64,8 @@ namespace CleverEdge
             public VFXEffectBehaviour prefab;
             public int startPoolCapacity;
             public int maxPoolCapacity;
+            
+            public string Name => effectType.ToString();
         }
 
         [SerializeField] private List<EffectInfo> _effects;

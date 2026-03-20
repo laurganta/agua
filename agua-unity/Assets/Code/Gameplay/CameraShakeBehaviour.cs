@@ -1,45 +1,96 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CleverEdge
 {
+    
     public class CameraShakeBehaviour : MonoBehaviour
     {
-        [SerializeField] private float _shakeDuration = 0.5f;
-        [SerializeField] private float _shakeMagnitude = 0.1f;
-        [SerializeField] private float _durationClamp;
+        [Header("Shake Settings")]
+        [SerializeField] private AnimationCurve strengthOverLifetime = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+        [SerializeField] private bool useUnscaledTime = false;
 
-        private Vector3 _initialPosition;
-        private float _shakeTimer;
+        private readonly List<ShakeInstance> _activeShakes = new();
+        private Vector3 _initialLocalPosition;
 
-        private void Start()
+        private void Awake()
         {
-            _initialPosition = transform.localPosition;
-        }
-        
-        public void TriggerShake()
-        {
-            Shake(_shakeDuration);
+            _initialLocalPosition = transform.localPosition;
+            
+            ServiceLocator.AddInstance(this);
         }
 
-        public void Shake(float duration)
+        private void OnEnable()
         {
-            _shakeTimer += duration;
-            if (_shakeTimer > _durationClamp)
-                _shakeTimer = _durationClamp;
+            _initialLocalPosition = transform.localPosition;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (_shakeTimer > 0)
+            var deltaTime = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
+            if (_activeShakes.Count == 0)
             {
-                var magnitude = _shakeMagnitude * (_shakeTimer / _shakeDuration);
-                transform.localPosition = _initialPosition + Random.insideUnitSphere * magnitude;
-                _shakeTimer -= Time.deltaTime;
+                transform.localPosition = _initialLocalPosition;
+                return;
             }
-            else
+
+            var totalMagnitude = 0f;
+
+            for (var i = _activeShakes.Count - 1; i >= 0; i--)
             {
-                transform.localPosition = _initialPosition;
+                var shake = _activeShakes[i];
+                shake.Elapsed += deltaTime;
+
+                if (shake.Elapsed >= shake.Duration)
+                {
+                    _activeShakes.RemoveAt(i);
+                    continue;
+                }
+
+                var normalizedTime = Mathf.Clamp01(shake.Elapsed / shake.Duration);
+                var strength01 = strengthOverLifetime.Evaluate(normalizedTime);
+                totalMagnitude += shake.BaseMagnitude * strength01;
+
+                _activeShakes[i] = shake;
             }
+
+            if (_activeShakes.Count == 0 || totalMagnitude <= 0f)
+            {
+                transform.localPosition = _initialLocalPosition;
+                return;
+            }
+
+            var offset = Random.insideUnitSphere * totalMagnitude;
+            transform.localPosition = _initialLocalPosition + offset;
+        }
+
+        public void Shake(float durationSeconds, float magnitude)
+        {
+            if (durationSeconds <= 0f || magnitude <= 0f)
+                return;
+
+            _activeShakes.Add(new ShakeInstance
+            {
+                Duration = durationSeconds,
+                BaseMagnitude = magnitude,
+                Elapsed = 0f
+            });
+        }
+
+        public void StopAllShakes(bool resetPosition = true)
+        {
+            _activeShakes.Clear();
+
+            if (resetPosition)
+                transform.localPosition = _initialLocalPosition;
+        }
+
+        private struct ShakeInstance
+        {
+            public float Duration;
+            public float BaseMagnitude;
+            public float Elapsed;
         }
     }
 }

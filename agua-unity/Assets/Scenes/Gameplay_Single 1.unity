@@ -1486,6 +1486,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ddc8a4fbfd4bae9d30fb6ccbf2b56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.AvatarBehaviour
+--- !u!1 &304870333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304870334}
+  m_Layer: 0
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &304870334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304870333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 820670024}
+  - {fileID: 697955010}
+  m_Father: {fileID: 1726094462}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &314005579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,9 +1724,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94a4755e8453925459159e8353301049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.CameraShakeBehaviour
-  _shakeDuration: 0.25
-  _shakeMagnitude: 0.2
-  _durationClamp: 3
+  strengthOverLifetime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useUnscaledTime: 0
 --- !u!1 &346761819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3998,6 +4053,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687664960}
   m_CullTransparentMesh: 1
+--- !u!1 &697955009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697955010}
+  m_Layer: 0
+  m_Name: DummyPosition 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &697955010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697955009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 0, z: 28.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 304870334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &707825515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7891480580419081407, guid: 06e58c67c30e6724abdeade7129864fd, type: 3}
@@ -4897,6 +4983,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &820670023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820670024}
+  m_Layer: 0
+  m_Name: DummyPosition 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &820670024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820670023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6, y: 0, z: 28.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 304870334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5377,10 +5494,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.GameplayState
   _enemiesControllerBehaviour: {fileID: 1726094463}
   _gameplayScreenBehaviour: {fileID: 1141303527}
-  _cameraShakeBehaviour: {fileID: 330585549}
   _powerUpsControllerBehaviour: {fileID: 1133865610}
   _flyTextController: {fileID: 1844983068}
   _playerBehaviour: {fileID: 1344164006}
+  _tutorialDummyEnemiesDelay: 0.75
+  _tutorialFingerDelay: 3
   _roundDuration: 30
   _waitingToEndDuration: 3
   _waitingToStartDuration: 1
@@ -7256,7 +7374,8 @@ MonoBehaviour:
   _bombDelaySeconds: 0.8
   _bombPositionShakeStrength: 0.5
   _bombScaleShakeStrength: 0.1
-  _bombCameraShakeDuration: 2
+  _bombCameraShakeDuration: 0.5
+  _bombCameraShakeMagnitude: 2
   _scoreMultiplier: 2
 --- !u!1 &1137556872
 GameObject:
@@ -10808,7 +10927,7 @@ MonoBehaviour:
     maxPoolCapacity: 100
   - effectType: 1
     prefab: {fileID: 4544690748221389532, guid: 0e9e36ab2f0b71e498729f0ace59f284, type: 3}
-    startPoolCapacity: 20
+    startPoolCapacity: 10
     maxPoolCapacity: 100
   - effectType: 2
     prefab: {fileID: 4544690748221389532, guid: 36684e12105919947b0dc5c30b5538f0, type: 3}
@@ -10817,15 +10936,15 @@ MonoBehaviour:
   - effectType: 3
     prefab: {fileID: 7109899675203425354, guid: 2507e494a06a4b743a0e950a1a044158, type: 3}
     startPoolCapacity: 10
-    maxPoolCapacity: 20
+    maxPoolCapacity: 30
   - effectType: 4
     prefab: {fileID: 7109899675203425354, guid: c7a04f453abffd94990bd5c85ad1577e, type: 3}
     startPoolCapacity: 10
     maxPoolCapacity: 20
   - effectType: 5
     prefab: {fileID: 7109899675203425354, guid: a786da40789e8a14bbe639b8842303c2, type: 3}
-    startPoolCapacity: 10
-    maxPoolCapacity: 20
+    startPoolCapacity: 20
+    maxPoolCapacity: 50
   - effectType: 6
     prefab: {fileID: 2817343734912439033, guid: dcec36be0dbb3e443b033ff99ae94155, type: 3}
     startPoolCapacity: 15
@@ -10846,6 +10965,22 @@ MonoBehaviour:
     prefab: {fileID: 5052540274515193354, guid: 26e7b09d859074b438a357803043d965, type: 3}
     startPoolCapacity: 2
     maxPoolCapacity: 3
+  - effectType: 11
+    prefab: {fileID: 4544690748221389532, guid: d2f2e9ae20073c040872055ff3120d44, type: 3}
+    startPoolCapacity: 10
+    maxPoolCapacity: 100
+  - effectType: 12
+    prefab: {fileID: 4544690748221389532, guid: c012ef1c2fb1449468468923438ffdeb, type: 3}
+    startPoolCapacity: 2
+    maxPoolCapacity: 2
+  - effectType: 13
+    prefab: {fileID: 7109899675203425354, guid: 6a47c1cc5eb8ea749ad9d74611f99f2e, type: 3}
+    startPoolCapacity: 10
+    maxPoolCapacity: 50
+  - effectType: 14
+    prefab: {fileID: 7109899675203425354, guid: 12042ac8c57c1f249a297c86f5841626, type: 3}
+    startPoolCapacity: 10
+    maxPoolCapacity: 20
 --- !u!1 &1553118008
 GameObject:
   m_ObjectHideFlags: 0
@@ -11632,6 +11767,7 @@ Transform:
   m_Children:
   - {fileID: 2120679851}
   - {fileID: 1874951030}
+  - {fileID: 304870334}
   m_Father: {fileID: 874134973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1726094463
@@ -11658,7 +11794,7 @@ MonoBehaviour:
     spawnDelaySeconds: 0
     score: 5
     scoreColor: {r: 1, g: 1, b: 1, a: 1}
-    scoreFlyTextSize: 1
+    scoreFlyTextSize: 1.5
   - tier: 1
     prefab: {fileID: 4157509982130224351, guid: 98379a51f96f1b847a5cdd90d90a2d8f, type: 3}
     startPoolCapacity: 10
@@ -11689,9 +11825,22 @@ MonoBehaviour:
     score: 20
     scoreColor: {r: 0.85780036, g: 0.6556604, b: 1, a: 1}
     scoreFlyTextSize: 2
+  - tier: 4
+    prefab: {fileID: 4157509982130224351, guid: de0c373a4bbbb7e4a98be6daf353a7a7, type: 3}
+    startPoolCapacity: 2
+    maxPoolCapacity: 2
+    spawnChance: 0
+    spawnCooldownSeconds: 0
+    spawnDelaySeconds: 50000
+    score: 5
+    scoreColor: {r: 0.6372293, g: 0.8679245, b: 0.61000353, a: 1}
+    scoreFlyTextSize: 2
   _spawnIntervalRange: {x: 0.25, y: 0.5}
   _enemiesSpawnCenter: {fileID: 2120679851}
   _spawnAreaSize: {x: 35, y: 50}
+  _dummyEnemiesPosition:
+  - {fileID: 820670024}
+  - {fileID: 697955010}
 --- !u!1001 &1735435924
 PrefabInstance:
   m_ObjectHideFlags: 0
