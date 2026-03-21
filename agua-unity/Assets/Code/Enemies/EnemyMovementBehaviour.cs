@@ -49,7 +49,7 @@ namespace CleverEdge
             
             _animator.SetFloat(SpeedHash, _animationSpeed);
             
-            while (t < duration)
+            while (t < 1)
             {
                 t += Time.deltaTime / duration;
                 _pathCompletedPercentage = _animationCurve.Evaluate(t);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4908822568058650264}
   - component: {fileID: 239463383040198452}
   m_Layer: 0
-  m_Name: Bubbles_Pink
+  m_Name: Bubbles_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,9 +236,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9137255, g: 0.33333334, b: 0.63529414, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.45490196, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.6431373, b: 0.34509805, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4930,7 +4930,7 @@ GameObject:
   - component: {fileID: 6308052973411883930}
   - component: {fileID: 6534862464453863285}
   m_Layer: 0
-  m_Name: Explosion_Pink
+  m_Name: Explosion_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5139,9 +5139,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9137255, g: 0.33333334, b: 0.63529414, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.45490196, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.6431373, b: 0.34509805, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9825,7 +9825,7 @@ GameObject:
   - component: {fileID: 4211805094015738779}
   - component: {fileID: -2333686171268086133}
   m_Layer: 0
-  m_Name: BulletHit_Pink
+  m_Name: BulletHit_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10036,9 +10036,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9137255, g: 0.33333334, b: 0.63529414, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.45490196, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.6431373, b: 0.34509805, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

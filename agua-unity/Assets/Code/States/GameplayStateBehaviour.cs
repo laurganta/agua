@@ -158,6 +158,7 @@ namespace CleverEdge
                     else if (_enemiesControllerBehaviour.Boss.FinishedMoving)
                     {
                         _enemiesControllerBehaviour.Boss.StopMoving();
+                        _enemiesControllerBehaviour.Boss.PlayBossAttackAnimation();
                         ChangeState(State.WaitingToEnd);
                     }
                     
@@ -212,10 +213,11 @@ namespace CleverEdge
                         _gameplayScreenBehaviour.ShowWinText();
                     }
                     else
+                    {
                         _gameplayScreenBehaviour.ShowLoseText();
+                    }
 
                     _roundTimer = 0;
-                    _enemiesControllerBehaviour.ClearRemainingEnemies();
                     _inputSystemActions.Disable();
                     break;
                 
@@ -224,6 +226,7 @@ namespace CleverEdge
                     LeaderboardState.Provider.SetEntry(
                         new LeaderboardEntry(Player.Current, Mathf.FloorToInt(_sessionData.Score), DateTime.Now));
 
+                    _enemiesControllerBehaviour.ClearRemainingEnemies();
                     OnGameEnd?.Invoke();
                     
                     break;

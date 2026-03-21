@@ -2,6 +2,6 @@ namespace CleverEdge
 {
     public class Constants
     {
-        public const string PIN = "1922";
+        public const string PIN = "qasdew";
     }
 }

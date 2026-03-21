@@ -7,6 +7,7 @@ namespace CleverEdge
     public class EnemyBehaviour : MonoBehaviour
     {
         private static readonly int DieHash = Animator.StringToHash("Die");
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
 
         [Header("References")]
         [SerializeField] private Transform _inOutAnimations;
@@ -50,7 +51,6 @@ namespace CleverEdge
         private VFXControllerBehaviour _vfxController;
         private CameraShakeBehaviour _cameraShakeBehaviour;
 
-
         public EnemyTier Tier { get; private set; }
 
         public float PathCompletedPercentage => _movementBehaviour.PathCompletedPercentage;
@@ -58,7 +58,8 @@ namespace CleverEdge
         public bool FinishedMoving => _movementBehaviour.FinishedMoving;
         
         public void Initialize(EnemyTier tier, 
-            Action<EnemyBehaviour, bool> onDeath, Action<EnemyBehaviour> onDamaged)
+            Action<EnemyBehaviour, bool> onDeath, 
+            Action<EnemyBehaviour> onDamaged)
         {
             _onDeath = onDeath;
             _onDamaged = onDamaged;
@@ -83,7 +84,7 @@ namespace CleverEdge
                 childCollider.enabled = true;
         }
 
-        private void Die(bool wasKilled)
+        private void Die(bool wasKilled, Vector3 hitPosition)
         {
             Handheld.Vibrate();
             _movementBehaviour?.Stop();
@@ -99,7 +100,7 @@ namespace CleverEdge
                 deathAnimation.onComplete += () =>
                 {
                     var vfxType = Tier.ToExplosionEffectType();
-                    _vfxController.PlayEffect(vfxType, _centerRoot.position, Quaternion.identity);
+                    _vfxController.PlayEffect(vfxType, hitPosition, Quaternion.identity);
 
                     GameDebug.Log($"{Time.frameCount} Death animation completed, invoking death callback");
                     _onDeath?.Invoke(this, true);
@@ -124,7 +125,7 @@ namespace CleverEdge
 
             if (_currentHealth <= 0f)
             {
-                Die(true);
+                Die(true, hitPosition);
             }
             else
             {
@@ -160,13 +161,14 @@ namespace CleverEdge
         {
             return _movementBehaviour.SetPath(path, direction, () =>
             {
-                Die(false);
+                if (Tier != EnemyTier.Boss)
+                    Die(false, _centerRoot.position);
             });
         }
         
         public void HideAfterSeconds(float seconds)
         {
-            _movementBehaviour.HideAfterSeconds(seconds, () => Die(false));
+            _movementBehaviour.HideAfterSeconds(seconds, () => Die(false, _centerRoot.position));
         }
 
         public EnemyMovementPathBehaviour GetMovementPath()
@@ -177,6 +179,16 @@ namespace CleverEdge
         public void StopMoving()
         {
             _movementBehaviour.Stop();
+        }
+
+        public void PlayBossAttackAnimation()
+        {
+            _animatorController.SetTrigger(AttackHash);
+        }
+
+        public void BossAttackTrigger()
+        {
+            ServiceLocator.GetInstance<PlayerBehaviour>().Kill();
         }
     }
 }

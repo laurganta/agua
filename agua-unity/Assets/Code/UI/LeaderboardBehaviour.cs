@@ -40,6 +40,8 @@ namespace CleverEdge
                 var leaderboardEntryBehaviour = Instantiate(_leaderboardEntryPrefab, _entriesParent);
                 leaderboardEntryBehaviour.Set(entry, index);
                 leaderboardEntryBehaviour.OnSelectPlayer += OnSelectPlayerClick;
+                if (String.CompareOrdinal(entry.Player.PlayerName, LeaderboardState.Provider.LastPlayerName) == 0)
+                    leaderboardEntryBehaviour.Highlight(true);
             }
         }
 

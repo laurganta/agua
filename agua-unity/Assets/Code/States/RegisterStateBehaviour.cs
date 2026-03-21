@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace CleverEdge
@@ -54,13 +53,7 @@ namespace CleverEdge
         {
             _registerScreenBehaviour.gameObject.SetActive(true);
             _registerScreenBehaviour.SetRandomAvatar();
-
-            // var entry = LeaderboardState.Provider.Entries.OrderBy(x => x.Time).FirstOrDefault();
-            //
-            // if (entry != null)
-            //     _registerScreenBehaviour.SetPlayer(entry.Player);
-            // else 
-            //     _registerScreenBehaviour.SetRandomAvatar();
+            _registerScreenBehaviour.PrepareForRegister();
         }
         
         private void OnDisable()

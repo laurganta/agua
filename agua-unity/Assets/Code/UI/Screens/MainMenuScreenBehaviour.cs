@@ -57,20 +57,18 @@ namespace CleverEdge
         
         public bool ShowDevMenu()
         {
-            AndroidPinDialog.Instance.ShowDefaultPinDialogue(
-                pin =>
+            ServiceLocator.GetInstance<PinPopupBehaviour>().Show(pin =>
+            {
+                GameDebug.Log("PIN entered: " + pin);
+                if (pin == Constants.PIN)
                 {
-                    GameDebug.Log("PIN entered: " + pin);
-                    if (pin == Constants.PIN)
-                    {
-                        _devMenu.SetActive(true);
-                    }
-                    else
-                    {
-                        GameDebug.Log("Incorrect PIN");
-                    }
+                    _devMenu.SetActive(true);
                 }
-            );
+                else
+                {
+                    GameDebug.Log("Incorrect PIN");
+                }
+            }, () => { });
 
             return false;
         }

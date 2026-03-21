@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2234226628918300002, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: m_Radius
+      value: 1.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2326983692804184405, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cc7d365090df464419b3c943244eb4f0, type: 2}
     - target: {fileID: 2871517715669670510, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: m_Name
       value: BacteriaEnemy_Boss

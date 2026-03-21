@@ -109,7 +109,10 @@ namespace CleverEdge
                     _activeEnemies.Remove(enemy);
 
                     if (enemy.Tier == EnemyTier.Boss)
+                    {
+                        Debug.Log($"Boss dismissed");
                         Boss = null;
+                    }
                 },
                 actionOnDestroy: (enemy) =>
                 {

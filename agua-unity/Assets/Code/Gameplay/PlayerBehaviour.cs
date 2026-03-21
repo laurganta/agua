@@ -38,6 +38,8 @@ namespace CleverEdge
         private bool _shooting;
         private float _shootRateMultiplier;
         
+        private bool _inputDisabled;
+
         private Tweener _actorShootTween;
         private Tweener _canPunchTween;
 
@@ -92,6 +94,10 @@ namespace CleverEdge
         
         public void PrepareForRound()
         {
+            _actorRoot.gameObject.SetActive(true);
+            _rightGunBehaviour.gameObject.SetActive(true);
+
+            _inputDisabled = false;
             _shooting = false;
             _shootTimer = 0;
             _shootRateMultiplier = 1;
@@ -172,6 +178,9 @@ namespace CleverEdge
 
         private void Update()
         {
+            if (_inputDisabled)
+                return;
+            
             var direction = GetAimDirection();
             Aim(direction);
 
@@ -184,6 +193,14 @@ namespace CleverEdge
                     _shootTimer = 0;
                 }
             }
+        }
+
+        public void Kill()
+        {
+            _inputDisabled = true;
+            _actorRoot.gameObject.SetActive(false);
+            _rightGunBehaviour.gameObject.SetActive(false);
+            SetLeftHandActive(false);
         }
     }
 }

@@ -23,6 +23,8 @@ namespace CleverEdge
         
         public List<LeaderboardEntry> Entries { get; private set; }
 
+        public string LastPlayerName { get; set; }
+
         private int LastLeaderboardIndex 
         { 
             get => PlayerPrefs.GetInt("last_leaderboard_index", 0);
@@ -117,6 +119,8 @@ namespace CleverEdge
                 return;
             }
 
+            LastPlayerName = entry.Player.PlayerName;
+            
             var scoreSet = false;
             
             foreach (var existingEntry in Entries)

@@ -22,7 +22,10 @@ namespace CleverEdge
         [SerializeField] private AvatarBehaviour _avatarBehaviour;
         [SerializeField] private List<RankSettings> _rankSettings;
         [SerializeField] private Button _selectPlayerButton;
+        [SerializeField] private Image _backgroundImage;
+        [SerializeField] private Color _highlightColor;
 
+        private Color _defaultBackgroundColor;
         private Player _player;
         
         public Action<string> OnSelectPlayer;
@@ -30,6 +33,7 @@ namespace CleverEdge
         private void Awake()
         {
             _selectPlayerButton.onClick.AddListener(OnSelectButtonClicked);
+            _defaultBackgroundColor = _backgroundImage.color;
         }
 
         private void OnSelectButtonClicked()
@@ -63,6 +67,11 @@ namespace CleverEdge
                     _rankSettings[i].reference.SetActive(false);
                 }
             }
+        }
+        
+        public void Highlight(bool highlight)
+        {
+            _backgroundImage.color = highlight ? _highlightColor : _defaultBackgroundColor;
         }
     }
 }

@@ -57,18 +57,32 @@ namespace CleverEdge
             _registerButton.interactable = false;
             _gdprToggle.isOn = false;
         }
+        
+        public void PrepareForRegister()
+        {
+            _nameField.text = string.Empty;
+            _phoneField.text = string.Empty;
+            _emailField.text = string.Empty;
+            _gdprToggle.isOn = false;
+            SetRandomAvatar();
+        }
 
         private void OnInstantPlayClick()
         {
-            AndroidPinDialog.Instance.ShowDefaultPinDialogue((pin) =>
+            ServiceLocator.GetInstance<PinPopupBehaviour>().Show(pin =>
             {
+                GameDebug.Log("PIN entered: " + pin);
                 if (pin == Constants.PIN)
                 {
                     SetRandomAvatar();
                     SetPlayer(Player.Admin);
                     OnRegister?.Invoke();
                 }
-            });
+                else
+                {
+                    GameDebug.Log("Incorrect PIN");
+                }
+            }, () => { });
         }
 
         private void SelectPlayerButtonClick()
