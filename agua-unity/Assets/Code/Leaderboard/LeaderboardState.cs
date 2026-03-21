@@ -64,13 +64,6 @@ namespace CleverEdge
                 GameDebug.Log("Already at the first leaderboard");
             }
         }
-
-        public void LoadLastLeaderboard()
-        {
-            Entries = Load(LastLeaderboardIndex);
-            SelectedLeaderboardIndex = LastLeaderboardIndex;
-            OnLoad?.Invoke(Entries, SelectedLeaderboardIndex);
-        }
         
         public void LoadSelectedLeaderboard()
         {

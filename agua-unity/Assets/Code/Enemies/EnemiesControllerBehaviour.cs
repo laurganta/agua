@@ -206,10 +206,12 @@ namespace CleverEdge
 
         public void ClearRemainingEnemies()
         {
-            var activeEnemies = FindObjectsByType<EnemyBehaviour>(FindObjectsSortMode.None);
-
-            foreach (var enemy in activeEnemies)
+            var enemies = new List<EnemyBehaviour>(_activeEnemies);
+            
+            foreach (var enemy in enemies)
                 _enemiesPools[enemy.Tier].Release(enemy);
+            
+            _activeEnemies.Clear();
         }
         
         public void SpawnTutorialEnemies()

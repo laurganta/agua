@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CleverEdge
 {
@@ -9,6 +10,7 @@ namespace CleverEdge
     {
         [SerializeField] private LeaderboardEntryBehaviour _leaderboardEntryPrefab;
         [SerializeField] private Transform _entriesParent;
+        [SerializeField] private ScrollRect _leaderboardScrollRect;
         [SerializeField] private TMP_Text _leaderboardIndex;
 
         public Action<string> OnSelectPlayer;
@@ -20,7 +22,6 @@ namespace CleverEdge
 
         public void Initialize()
         {
-            LeaderboardState.Provider.LoadSelectedLeaderboard();
             Initialize(LeaderboardState.Provider.Entries, LeaderboardState.Provider.SelectedLeaderboardIndex);
         }
 
@@ -43,6 +44,15 @@ namespace CleverEdge
                 if (String.CompareOrdinal(entry.Player.PlayerName, LeaderboardState.Provider.LastPlayerName) == 0)
                     leaderboardEntryBehaviour.Highlight(true);
             }
+            
+            // scroll to highlighted player
+            var highlightedPlayerIndex = entries.FindIndex(x => String.CompareOrdinal(x.Player.PlayerName, LeaderboardState.Provider.LastPlayerName) == 0);
+            if (highlightedPlayerIndex >= 0)
+            {
+                var normalizedPosition = 1 - (float)highlightedPlayerIndex / (entries.Count - 1);
+                _leaderboardScrollRect.verticalNormalizedPosition = normalizedPosition;
+            } else 
+                _leaderboardScrollRect.verticalNormalizedPosition = 1;
         }
 
         private void OnSelectPlayerClick(string playerName)

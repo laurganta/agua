@@ -23,7 +23,7 @@ namespace CleverEdge
             _swipeDetectionController = new SwipeDetectionController();
             _swipeDetectionController.OnSwipe += OnSwipe;
             
-            LeaderboardState.Provider.LoadLastLeaderboard();
+            LeaderboardState.Provider.LoadSelectedLeaderboard();
         }
 
         private void OnStartNewMatch()
@@ -69,6 +69,7 @@ namespace CleverEdge
 
         private void OnEnable()
         {
+            LeaderboardState.Provider.LoadSelectedLeaderboard();
             _mainMenuScreenBehaviour.gameObject.SetActive(true);
             _mainMenuScreenBehaviour.Initialize();
         }

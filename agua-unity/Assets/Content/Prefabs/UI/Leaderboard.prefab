@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CleverEdge.LeaderboardBehaviour
   _leaderboardEntryPrefab: {fileID: 4179909823623352545, guid: 33d437cb19dbee64d988c9759f8a65d7, type: 3}
   _entriesParent: {fileID: 6786900650509138149}
+  _leaderboardScrollRect: {fileID: 4593178324056759309}
   _leaderboardIndex: {fileID: 3254871240068807522}
 --- !u!1 &1586208263924314977
 GameObject:
@@ -148,13 +149,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586208263924314977}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

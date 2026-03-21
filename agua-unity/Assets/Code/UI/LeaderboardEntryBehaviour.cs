@@ -19,6 +19,7 @@ namespace CleverEdge
 
         [SerializeField] private TextMeshProUGUI _playerNameText;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private TextMeshProUGUI _rankText;
         [SerializeField] private AvatarBehaviour _avatarBehaviour;
         [SerializeField] private List<RankSettings> _rankSettings;
         [SerializeField] private Button _selectPlayerButton;
@@ -45,10 +46,12 @@ namespace CleverEdge
         {
             _player = entry.Player;
             
+            var clampedRankIndex = Mathf.Clamp(rankIndex, 0, _rankSettings.Count - 1);
+            
             _playerNameText.text = entry.Player.PlayerName;
             _scoreText.text = entry.Score.ToString("0");
-            _scoreText.color = _rankSettings[rankIndex].scoreColor;
-            _scoreText.fontSize = _rankSettings[rankIndex].scoreFontSize;
+            _scoreText.color = _rankSettings[clampedRankIndex].scoreColor;
+            _scoreText.fontSize = _rankSettings[clampedRankIndex].scoreFontSize;
             
             _avatarBehaviour.SetAvatar(entry.Player.AvatarIndex);
 
@@ -60,7 +63,7 @@ namespace CleverEdge
                 {
                     var reference = _rankSettings[i].reference;
                     reference.SetActive(true);
-                    reference.GetComponentInChildren<TMP_Text>().text = _rankSettings[i].rank.ToString();
+                    reference.GetComponentInChildren<TMP_Text>().text = rank.ToString();
                 }
                 else
                 {
