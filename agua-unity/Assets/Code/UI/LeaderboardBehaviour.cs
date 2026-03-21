@@ -27,13 +27,14 @@ namespace CleverEdge
 
         private void Initialize(List<LeaderboardEntry> entries, int leaderboardIndex)
         {
-            _leaderboardIndex .text = $"Match {leaderboardIndex + 1}";
-            gameObject.SetActive(entries.Count > 0);
+            _entriesParent.ClearChildren();
+            
+            _leaderboardIndex.text = $"Match {leaderboardIndex + 1}";
+            // gameObject.SetActive(entries.Count > 0);
 
             if (entries.Count == 0)
                 return;
 
-            _entriesParent.ClearChildren();
 
             for (var index = 0; index < entries.Count; index++)
             {

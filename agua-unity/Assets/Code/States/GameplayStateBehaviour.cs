@@ -34,7 +34,7 @@ namespace CleverEdge
         [SerializeField] private float _tutorialFingerDelay;
         
         [Header("Round Settings")]
-        [SerializeField] private float _roundDuration;
+        [SerializeField] private float _roundDurationSeconds;
         [SerializeField] private float _waitingToEndDuration;
 
         [Header("Misc")] // This Should Not Be Here
@@ -50,16 +50,18 @@ namespace CleverEdge
         private float _currentScoreMultiplier;
         private bool _hasSeenDummyTutorialEnemies;
 
+        private bool _hasSeenTutorialFinger;
+
         private bool _bossDefeated;
 
         private SessionData _sessionData;
-        public Action OnGameEnd;
+        public Action<float> OnGameEnd;
         
         private bool HasScoreMultiplier => _currentScoreMultiplier > 1;
 
         public void SetRoundDuration(float duration)
         {
-            _roundDuration = duration;
+            _roundDurationSeconds = duration;
         }
         
         private void Awake()
@@ -84,8 +86,6 @@ namespace CleverEdge
             if (_gameplayScreenBehaviour)
                 _gameplayScreenBehaviour.gameObject.SetActive(false);
         }
-
-        private bool _hasSeenTutorialFinger;
         
         private void Update()
         {
@@ -97,7 +97,7 @@ namespace CleverEdge
                     _gameplayScreenBehaviour.PrepareForRound();
                     
                     _roundTimer = 0;
-                    _currentRoundDuration = _roundDuration;
+                    _currentRoundDuration = _roundDurationSeconds;
                     _bossDefeated = false;
                     _currentScoreMultiplier = 1;
                     _currentStateTimer = 0;
@@ -113,6 +113,7 @@ namespace CleverEdge
                     break;
                 
                 case State.Tutorial:
+                    _inputSystemActions.Enable();
 
                     if (_hasSeenDummyTutorialEnemies == false)
                     {
@@ -193,7 +194,6 @@ namespace CleverEdge
                 
                 case State.Playing:
                     _gameplayScreenBehaviour.StartPlaying();
-                    _inputSystemActions.Enable();
                     _enemiesControllerBehaviour.StartSpawning();
                     _powerUpsControllerBehaviour.StartSpawning();
                     break;
@@ -223,11 +223,9 @@ namespace CleverEdge
                 
                 case State.End:
                     
-                    LeaderboardState.Provider.SetEntry(
-                        new LeaderboardEntry(Player.Current, Mathf.FloorToInt(_sessionData.Score), DateTime.Now));
-
                     _enemiesControllerBehaviour.ClearRemainingEnemies();
-                    OnGameEnd?.Invoke();
+                    
+                    OnGameEnd.Invoke(_sessionData.Score);
                     
                     break;
                 default:

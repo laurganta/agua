@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace CleverEdge
 {
@@ -8,6 +9,8 @@ namespace CleverEdge
         [Header("Build Settings")]
         [SerializeField] private float _roundDuration;
         [SerializeField] private bool _startWithoutRegistering;
+        [SerializeField] private float _bossMovementDuration;
+        [SerializeField] private EnemyBehaviour _bossPrefab;
         
         [ContextMenu("PrepareBuild")]
         public void PrepareBuild()
@@ -19,6 +22,9 @@ namespace CleverEdge
 
             FindAnyObjectByType<GameplayStateBehaviour>(FindObjectsInactive.Include).SetRoundDuration(_roundDuration);
             FindAnyObjectByType<RegisterScreenBehaviour>(FindObjectsInactive.Include).SetStartWithoutRegistering(_startWithoutRegistering);
+
+            _bossPrefab.GetComponent<EnemyMovementBehaviour>()
+                .SetDurationRange(new Vector2(_bossMovementDuration, _bossMovementDuration));
         }
 
         private enum GameState
@@ -58,11 +64,16 @@ namespace CleverEdge
             };
             
             _mainMenuStateBehaviour.OnPlay += OnPlay;
-            _gameplayStateBehaviour.OnGameEnd += ToMainMenu;
+            _mainMenuStateBehaviour.OnRetry += OnRetry;
+            
+            _gameplayStateBehaviour.OnGameEnd += OnGameEnd;
+            
             _endScreenStateBehaviour.OnReturnToMainMenu += ToMainMenu;
+            
             _registerStateBehaviour.OnRegister += OnRegister;
             _registerStateBehaviour.OnBackButton += ToMainMenu;
             _registerStateBehaviour.OnGDPRButton += ToGDPRScreen;
+            
             _gdprStateBehaviour.OnAccept += OnGDPRAccept;
             _gdprStateBehaviour.OnBack += OnGDPRBack;
 
@@ -71,6 +82,18 @@ namespace CleverEdge
             ServiceLocator.AddInstance(_avatarsConfig);
             
             LeaderboardState.Initialize();
+        }
+
+        private void OnGameEnd(float score)
+        {
+            ToState(GameState.Register);
+            _registerStateBehaviour.SetCurrentScore(score);
+        }
+
+        private void OnRetry()
+        {
+            ToState(GameState.Register);
+            _registerStateBehaviour.SetPlayer(LeaderboardState.Provider.LastPlayer);
         }
 
         private void ToGDPRScreen()
@@ -91,12 +114,12 @@ namespace CleverEdge
 
         private void OnPlay()
         {
-            ToState(GameState.Register);
+            ToState(GameState.Gameplay);
         }
 
         private void OnRegister()
         {
-            StartPlaying();
+            ToMainMenu();
         }
 
         private void Start()

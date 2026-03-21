@@ -13,11 +13,13 @@ namespace CleverEdge
         [SerializeField] private Button _hideDevMenu;
         [SerializeField] private Button _resetButton;
         [SerializeField] private Button _startNewMatchButton;
+        [SerializeField] private Button _retryButton;
 
         [SerializeField] private LeaderboardBehaviour _leaderboardBehaviour;
         
         public Action OnPlay;
         public Action OnReset;
+        public Action OnRetry;
         public Action OnStartNewMatch;
         public Action<string> OnSelectPlayer;
 
@@ -30,9 +32,20 @@ namespace CleverEdge
             _showDevMenu.onClick.AddListener(() => ShowDevMenu());
             _hideDevMenu.onClick.AddListener(HideDevMenu);
             _resetButton.onClick.AddListener(OnResetButtonClick);
+            _retryButton.onClick.AddListener(OnRetryButton);
             
             _leaderboardBehaviour.OnSelectPlayer += OnSelectPlayerClicked;
             _leaderboardBehaviour.Setup();
+        }
+
+        public void SetRetryButtonVisible(bool visible)
+        {
+            _retryButton.gameObject.SetActive(visible);
+        }
+        
+        private void OnRetryButton()
+        {
+            OnRetry.Invoke();
         }
 
         private void OnStartNewMatchClick()
@@ -55,24 +68,29 @@ namespace CleverEdge
             _leaderboardBehaviour.Initialize();
         }
         
-        public bool ShowDevMenu()
+        public void ShowDevMenu(string playerName = null)
         {
             ServiceLocator.GetInstance<PinPopupBehaviour>().Show(pin =>
             {
                 GameDebug.Log("PIN entered: " + pin);
+                
                 if (pin == Constants.PIN)
                 {
                     _devMenu.SetActive(true);
+                    _devMenu.GetComponentInChildren<PlayerInfoListBehaviour>().SearchPlayer(playerName);
                 }
                 else
                 {
                     GameDebug.Log("Incorrect PIN");
                 }
             }, () => { });
-
-            return false;
         }
 
+        public bool IsDevMenuActive()
+        {
+            return _devMenu.activeSelf;
+        }
+        
         public void HideDevMenu()
         {
             _devMenu.SetActive(false);
@@ -85,9 +103,7 @@ namespace CleverEdge
 
         public void SelectPlayerInDebugMenu(string playerName)
         {
-            var success = ShowDevMenu();
-            if (success)
-                _devMenu.GetComponentInChildren<PlayerInfoListBehaviour>().SearchPlayer(playerName);
+            ShowDevMenu(playerName);
         }
     }
 }

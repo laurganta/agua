@@ -66,5 +66,10 @@ namespace CleverEdge
             if (_followPathCoroutine != null)
                 StopCoroutine(_followPathCoroutine);
         }
+
+        public void SetDurationRange(Vector2 durationRange)
+        {
+            _durationRange = durationRange;
+        }
     }
 }

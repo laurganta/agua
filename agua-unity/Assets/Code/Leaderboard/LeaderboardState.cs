@@ -33,8 +33,21 @@ namespace CleverEdge
 
         public int SelectedLeaderboardIndex
         {
-            get => PlayerPrefs.GetInt("selected_leaderboard_index", 0);
-            private set => PlayerPrefs.SetInt("selected_leaderboard_index", value);
+            get;
+            private set;
+        }
+
+        public Player LastPlayer
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(LastPlayerName) == false)
+                    return Entries
+                        .First(x => x.Player.PlayerName == LastPlayerName)
+                        .Player;
+
+                return null;
+            }
         }
 
         public void SetNextLeaderboard()
@@ -87,7 +100,6 @@ namespace CleverEdge
             
             entries = Sort(entries);
 
-            
             GameDebug.Log($"Loaded leaderboard {leaderboardIndex} with {entries.Count} entries");
             
             return entries;
@@ -116,6 +128,8 @@ namespace CleverEdge
             
             var scoreSet = false;
             
+            Entries = Load(LastLeaderboardIndex);
+            
             foreach (var existingEntry in Entries)
                 if (string.Equals(existingEntry.Player.PlayerName, entry.Player.PlayerName,
                         StringComparison.InvariantCulture))
@@ -139,7 +153,9 @@ namespace CleverEdge
             }
             
             Entries = Sort(Entries);
-            Save(Entries, SelectedLeaderboardIndex);
+            Save(Entries, LastLeaderboardIndex);
+            
+            SelectedLeaderboardIndex = LastLeaderboardIndex;
         }
         
         private void Save(List<LeaderboardEntry> entries, int leaderboardIndex)
@@ -220,9 +236,18 @@ namespace CleverEdge
 
         public void CreateNewMatch()
         {
+            var currentEntries = Load(LastLeaderboardIndex);
+            if (currentEntries.Count == 0)
+            {
+                GameDebug.Log("Current leaderboard is empty, no need to create a new one");
+                return;
+            }
+
             LastLeaderboardIndex++;
             SelectedLeaderboardIndex = LastLeaderboardIndex;
             GameDebug.Log($"New Leaderboard {SelectedLeaderboardIndex}");
+            Entries.Clear();
+            Save(Entries, LastLeaderboardIndex);
             LoadSelectedLeaderboard();
         }
     }
