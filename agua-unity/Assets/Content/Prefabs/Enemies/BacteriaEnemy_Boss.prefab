@@ -42,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _durationRange.x
-      value: 2
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6656731113883399424, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _durationRange.y
-      value: 2
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6809545145638078787, guid: 04a3a78118818db4b88bbf26f47487eb, type: 3}
       propertyPath: _tier

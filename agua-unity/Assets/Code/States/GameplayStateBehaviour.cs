@@ -158,8 +158,8 @@ namespace CleverEdge
                     }
                     else if (_enemiesControllerBehaviour.Boss.FinishedMoving)
                     {
-                        _enemiesControllerBehaviour.Boss.StopMoving();
-                        _enemiesControllerBehaviour.Boss.PlayBossAttackAnimation();
+                        // _enemiesControllerBehaviour.Boss.StopMoving();
+                        // _enemiesControllerBehaviour.Boss.PlayBossAttackAnimation();
                         ChangeState(State.WaitingToEnd);
                     }
                     
@@ -207,15 +207,20 @@ namespace CleverEdge
                 
                 case State.WaitingToEnd:
 
-                    if (_bossDefeated)
+                    // if (_bossDefeated)
+                    // {
+                    if (_bossDefeated == false)
                     {
-                        _confettiParticleSystem.Play(true);
-                        _gameplayScreenBehaviour.ShowWinText();
+                        _enemiesControllerBehaviour.Boss.Damage(1000000, _enemiesControllerBehaviour.Boss.transform.position);
                     }
-                    else
-                    {
-                        _gameplayScreenBehaviour.ShowLoseText();
-                    }
+
+                    _confettiParticleSystem.Play(true);
+                    _gameplayScreenBehaviour.ShowWinText();
+                    // }
+                    // else
+                    // {
+                    //     _gameplayScreenBehaviour.ShowLoseText();
+                    // }
 
                     _roundTimer = 0;
                     _inputSystemActions.Disable();
@@ -253,6 +258,7 @@ namespace CleverEdge
                 _bossDefeated = true;
 
                 score *= 1 - enemyBehaviour.PathCompletedPercentage;
+                score += 100;
             }
 
             _sessionData.Score += score;

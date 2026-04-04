@@ -15,6 +15,7 @@ namespace CleverEdge
         [SerializeField] private Button _backbutton;
         [SerializeField] private Button _gdprButton;
         [SerializeField] private Button _instantPlayButton;
+        [SerializeField] private TMP_Text _scoreText;
         
         // [SerializeField] private Button _selectPlayerButton;
         
@@ -39,7 +40,8 @@ namespace CleverEdge
         
         public int AvatarIndex => _avatarBehaviour.AvatarIndex;
         public bool GdprAccepted => _gdprToggle.isOn;
-        
+        public Action OnActivity;
+
         public void SetStartWithoutRegistering(bool value)
         {
             _playWithoutRegistering = value;
@@ -52,18 +54,29 @@ namespace CleverEdge
             _backbutton.onClick.AddListener(OnBackButtonClick);
             _gdprButton.onClick.AddListener(OnGDPRButtonClick);
             _instantPlayButton.onClick.AddListener(OnInstantPlayClick);
+            _nameField.onValueChanged.AddListener(OnActivityInput);
+            _phoneField.onValueChanged.AddListener(OnActivityInput);
+            _emailField.onValueChanged.AddListener(OnActivityInput);
             // _selectPlayerButton.onClick.AddListener(SelectPlayerButtonClick);
 
             _registerButton.interactable = false;
             _gdprToggle.isOn = false;
         }
-        
-        public void PrepareForRegister()
+
+        private void OnActivityInput(string arg0)
+        {
+            OnActivity?.Invoke();
+        }
+
+        public void PrepareForRegister(int score)
         {
             _nameField.text = string.Empty;
             _phoneField.text = string.Empty;
             _emailField.text = string.Empty;
             _gdprToggle.isOn = false;
+            
+            _scoreText.text = score.ToString();
+            _scoreText.gameObject.SetActive(score > 0);
             SetRandomAvatar();
         }
 
@@ -127,11 +140,13 @@ namespace CleverEdge
 
         private void OnRegisterButtonClick()
         {
+            OnActivity?.Invoke();
             OnRegister?.Invoke();
         }
         
         private void OnBackButtonClick()
         {
+            OnActivity?.Invoke();
             OnBackButton?.Invoke();
         }
 

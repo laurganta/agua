@@ -158,5 +158,10 @@ namespace CleverEdge
                 _mainMenuScreenBehaviour.HideDevMenu();
             }
         }
+
+        public void SetIdleTime(float idleTime)
+        {
+            _idleTimer = idleTime;
+        }
     }
 }

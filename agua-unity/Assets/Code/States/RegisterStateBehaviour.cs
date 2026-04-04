@@ -1,11 +1,15 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace CleverEdge
 {
     public class RegisterStateBehaviour : GameStateBehaviourBase
     {
         [SerializeField] private RegisterScreenBehaviour _registerScreenBehaviour;
+        [SerializeField] private float _idleTimeoutSeconds = 30f;
         
         public Action OnRegister;
         public Action OnBackButton;
@@ -14,11 +18,19 @@ namespace CleverEdge
         private Player _playerCache;
         private float _currentScore;
 
+        private float _idleTimer;
+
         private void Awake()
         {
             _registerScreenBehaviour.OnRegister += OnRegisterClick;
             _registerScreenBehaviour.OnBackButton += OnBackButtonClick;
             _registerScreenBehaviour.OnGDPRButton += OnGdprButtonClick;
+            _registerScreenBehaviour.OnActivity += OnActivity;
+        }
+
+        private void OnActivity()
+        {
+            _idleTimer = 0;
         }
 
         private void OnGdprButtonClick()
@@ -75,7 +87,8 @@ namespace CleverEdge
         {
             _registerScreenBehaviour.gameObject.SetActive(true);
             _registerScreenBehaviour.SetRandomAvatar();
-            _registerScreenBehaviour.PrepareForRegister();
+
+            _registerScreenBehaviour.PrepareForRegister((int) _currentScore);
 
             if (_playerCache != null)
             {
@@ -100,6 +113,19 @@ namespace CleverEdge
         public void SetPlayer(Player player)
         {
             _registerScreenBehaviour.SetPlayer(player);
+        }
+
+        private void Update()
+        {
+            if (Touchscreen.current.primaryTouch.phase.value == TouchPhase.Began)
+                _idleTimer = 0;
+            
+            _idleTimer += Time.deltaTime;
+            if (_idleTimer >= _idleTimeoutSeconds)
+            {
+                _idleTimer = 0;
+                OnBackButton.Invoke();
+            }
         }
     }
 }

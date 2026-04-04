@@ -14,6 +14,7 @@ namespace CleverEdge
         public static void Initialize()
         {
             Provider = new LeaderboardStateProvider();
+            Provider.Initialize();
         }
     }
 
@@ -29,6 +30,26 @@ namespace CleverEdge
         { 
             get => PlayerPrefs.GetInt("last_leaderboard_index", 0);
             set => PlayerPrefs.SetInt("last_leaderboard_index", value);
+        }
+        
+        public DateTime LastMatchStartTime
+        {
+            get
+            {
+                var ticks = PlayerPrefs.GetString("last_round_start_time", "0");
+                if (long.TryParse(ticks, out var ticksValue))
+                    return new DateTime(ticksValue);
+
+                return DateTime.MinValue;
+            }
+            set => PlayerPrefs.SetString("last_round_start_time", value.Ticks.ToString());
+        }
+
+        public bool HasMatchExpired(int durationMinutes)
+        {
+            var matchDuration = TimeSpan.FromMinutes(durationMinutes);
+            var timeSinceLastMatch = DateTime.Now - LastMatchStartTime;
+            return timeSinceLastMatch > matchDuration;
         }
 
         public int SelectedLeaderboardIndex
@@ -240,15 +261,23 @@ namespace CleverEdge
             if (currentEntries.Count == 0)
             {
                 GameDebug.Log("Current leaderboard is empty, no need to create a new one");
+                LastMatchStartTime = DateTime.Now;
                 return;
             }
 
+            LastMatchStartTime = DateTime.Now;
+            
             LastLeaderboardIndex++;
             SelectedLeaderboardIndex = LastLeaderboardIndex;
             GameDebug.Log($"New Leaderboard {SelectedLeaderboardIndex}");
             Entries.Clear();
             Save(Entries, LastLeaderboardIndex);
             LoadSelectedLeaderboard();
+        }
+
+        public void Initialize()
+        {
+            SelectedLeaderboardIndex = LastLeaderboardIndex;
         }
     }
 }

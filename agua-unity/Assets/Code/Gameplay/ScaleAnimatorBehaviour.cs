@@ -9,6 +9,8 @@ namespace CleverEdge
         [SerializeField] private float _delta;
         [SerializeField] private Vector2 _intervalRange;
         [SerializeField] private AnimationCurve _curve;
+        [SerializeField] private Vector2 _delayRange;
+        [SerializeField] private bool _lockYAxis = true;
 
         private float _currentDuration;
         private float _timer;
@@ -22,13 +24,19 @@ namespace CleverEdge
             _scaleMin = transform.localScale - Vector3.one * _delta;
             _scaleMax = transform.localScale + Vector3.one * _delta;
 
-            _scaleMin.y = transform.localScale.y;
-            _scaleMax.y = transform.localScale.y;
-            
+            if (_lockYAxis == true)
+            {
+                _scaleMin.y = transform.localScale.y;
+                _scaleMax.y = transform.localScale.y;
+            }
+
             _currentDuration = Random.Range(_intervalRange.x, _intervalRange.y);
             
             _direction = Random.value < 0.5f ? -1 : 1;
             transform.localScale = _direction == 1 ? _scaleMin : _scaleMax;
+            
+            var delay = Random.Range(_delayRange.x, _delayRange.y);
+            _timer = -delay;
         }
 
         private void Update()

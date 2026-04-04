@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace CleverEdge
 {
@@ -11,6 +11,7 @@ namespace CleverEdge
         [SerializeField] private bool _startWithoutRegistering;
         [SerializeField] private float _bossMovementDuration;
         [SerializeField] private EnemyBehaviour _bossPrefab;
+        [SerializeField] private float _idleTime;
         
         [ContextMenu("PrepareBuild")]
         public void PrepareBuild()
@@ -25,6 +26,8 @@ namespace CleverEdge
 
             _bossPrefab.GetComponent<EnemyMovementBehaviour>()
                 .SetDurationRange(new Vector2(_bossMovementDuration, _bossMovementDuration));
+            
+            _mainMenuStateBehaviour.SetIdleTime(_idleTime);
         }
 
         private enum GameState
@@ -47,10 +50,13 @@ namespace CleverEdge
         [SerializeField] private AvatarsConfig _avatarsConfig;
 
         [SerializeField] private bool _instantStart;
+        [SerializeField] private int _matchDurationMinutes;
 
         private Dictionary<GameState, GameStateBehaviourBase> _states;
 
         private Player _currentPlayer;
+        
+        public int MatchDurationMinutes => _matchDurationMinutes;
         
         private void Awake()
         {
@@ -80,14 +86,15 @@ namespace CleverEdge
             Application.targetFrameRate = 144;
             
             ServiceLocator.AddInstance(_avatarsConfig);
+            ServiceLocator.AddInstance(this);
             
             LeaderboardState.Initialize();
         }
 
         private void OnGameEnd(float score)
         {
-            ToState(GameState.Register);
             _registerStateBehaviour.SetCurrentScore(score);
+            ToState(GameState.Register);
         }
 
         private void OnRetry()
@@ -114,7 +121,10 @@ namespace CleverEdge
 
         private void OnPlay()
         {
-            ToState(GameState.Gameplay);
+            if (LeaderboardState.Provider.HasMatchExpired(MatchDurationMinutes))
+                LeaderboardState.Provider.CreateNewMatch();
+            
+            StartPlaying();
         }
 
         private void OnRegister()
